@@ -2,26 +2,38 @@
 
 :root {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #0f172a;
-  background: #f8fafc;
+  color: #172033;
+  background: #f5f6f8;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  --brand: #1557c0;
+  --brand-dark: #12499f;
+  --ink: #172033;
+  --muted: #596579;
+  --canvas: #f5f6f8;
+  --line: #d9dee7;
+  --surface: #ffffff;
 }
 
 @theme {
-  --color-brand: #1d4ed8;
-  --color-ink: #0f172a;
-  --color-muted: #475569;
-  --color-canvas: #f8fafc;
+  --color-brand: #1557c0;
+  --color-ink: #172033;
+  --color-muted: #596579;
+  --color-canvas: #f5f6f8;
   --max-width-content: 1320px;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; }
-button, input { font: inherit; }
-:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; }
-.hero-placeholder { background: linear-gradient(135deg, #dce9ea 0%, #d8cfc2 48%, #aab9b3 100%); }
+body { margin: 0; min-width: 320px; color: var(--ink); }
+button, input, select, textarea { font: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #1557c0; outline-offset: 3px; }
+.market-shell { max-width: 1320px; margin-inline: auto; padding-inline: 20px; }
+.market-surface { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.product-media { display: grid; place-items: center; aspect-ratio: 1 / 1; overflow: hidden; background: #f0f2f5; color: #9aa4b3; }
+.hero-placeholder { background: linear-gradient(90deg, #edf1f5, #e4e9ef); }
+@media (max-width: 640px) { .market-shell { padding-inline: 16px; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }

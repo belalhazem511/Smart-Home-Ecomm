@@ -1,23 +1,22 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import Icon from './Icon.jsx';
+import { categories } from '../data/homeContent.js';
 import { useCart } from '../contexts/CartContext.jsx';
-
-const links = ['All categories', 'Switches', 'Lighting', 'Sensors', 'Security', 'Curtains', 'Hubs'];
 
 export default function StoreHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { totalUnits } = useCart();
-  return <>
-    <div className="hidden border-b border-slate-200 bg-slate-100 text-sm md:block"><div className="mx-auto flex max-w-content justify-between px-6 py-2 text-slate-700"><span>Smart devices. Clear choices.</span><div className="flex gap-6"><a href="#help">Help &amp; support</a><a href="/seller">Demo seller portal</a></div></div></div>
-    <header className="mx-auto max-w-content px-4 md:px-6 lg:px-8">
-      <div className="flex min-h-16 items-center justify-between gap-3 border-b border-slate-200 py-2 md:min-h-[76px]">
-        <button className="flex min-h-11 min-w-11 items-center justify-center md:hidden" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="category-nav" onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'}/></button>
-        <a href="/" className="flex shrink-0 items-center gap-2 text-lg font-extrabold sm:text-xl"><Icon name="home" className="h-8 w-8 text-brand"/>SMART HOME</a>
-        <form action="/search" method="get" role="search" className="hidden max-w-xl flex-1 md:flex"><label className="sr-only" htmlFor="search-desktop">Search devices, brands or protocols</label><input id="search-desktop" name="q" className="h-12 w-full rounded-lg border border-slate-400 bg-white px-4" placeholder="Search devices, brands or protocols"/></form>
-        <div className="flex items-center gap-2"><a href="/sign-in" aria-label="Sign in" className="flex min-h-11 items-center gap-2 px-2 hover:text-brand"><Icon name="user"/><span>Sign in</span></a><a href="/cart" aria-label={`Cart, ${totalUnits} items`} className="flex min-h-11 items-center gap-2 px-2 hover:text-brand"><Icon name="cart"/><span className="hidden lg:inline">Cart</span><span aria-live="polite" className="min-w-5 rounded-full bg-blue-100 px-1 text-center text-xs font-semibold text-brand">{totalUnits}</span></a></div>
-      </div>
-      <form action="/search" method="get" role="search" className="flex gap-2 py-2 md:hidden"><label className="sr-only" htmlFor="search-mobile">Search devices or protocols</label><input id="search-mobile" name="q" className="h-12 min-w-0 flex-1 rounded-lg border border-slate-400 bg-white px-4" placeholder="Search devices or protocols"/><span className="flex min-h-11 items-center rounded-lg border border-slate-300 px-3 text-sm">Egypt · EGP</span></form>
-      <nav id="category-nav" aria-label="Device categories" className={`${menuOpen ? 'block' : 'hidden'} border-b border-slate-200 md:block`}><div className="flex gap-1 overflow-x-auto py-2 md:justify-between">{links.map((name, index) => <a key={name} onClick={() => setMenuOpen(false)} className="min-h-11 shrink-0 rounded-lg px-3 py-3 text-sm font-medium hover:bg-slate-100" href={index === 0 ? '/shop' : `/categories/${name.toLowerCase()}`}>{name}</a>)}</div></nav>
-    </header>
-  </>;
+  return <header className="sticky top-0 z-30 border-b border-slate-200 bg-white">
+    <div className="border-b border-slate-100 bg-slate-50"><div className="market-shell flex min-h-9 items-center justify-between text-xs text-slate-600"><span>Smart home essentials, clearly chosen</span><div className="flex gap-4"><a href="/seller" className="hover:text-brand">Seller preview</a><span>Egypt | EGP</span></div></div></div>
+    <div className="market-shell flex min-h-[68px] items-center gap-3 py-2">
+      <button type="button" aria-label={menuOpen ? 'Close categories' : 'Open categories'} aria-expanded={menuOpen} aria-controls="store-categories" onClick={() => setMenuOpen((open) => !open)} className="grid min-h-11 min-w-11 place-items-center rounded-lg border border-slate-200 md:hidden"><Icon name={menuOpen ? 'close' : 'menu'}/></button>
+      <a href="/" className="flex shrink-0 items-center gap-2 text-base font-extrabold tracking-tight sm:text-lg"><Icon name="home" className="h-7 w-7 text-brand"/><span>SMART HOME</span></a>
+      <form action="/search" method="get" role="search" className="hidden min-w-0 flex-1 md:flex">
+        <label className="sr-only" htmlFor="search-desktop">Search products</label><div className="flex h-11 w-full max-w-2xl overflow-hidden rounded-lg border border-slate-300 bg-white focus-within:border-brand"><input id="search-desktop" name="q" className="min-w-0 flex-1 px-4 text-sm outline-none" placeholder="Search products, brands or protocols"/><button type="submit" aria-label="Search" className="grid w-12 place-items-center bg-slate-50 text-slate-700 hover:bg-slate-100"><Icon name="search"/></button></div>
+      </form>
+      <nav aria-label="Account and cart" className="ml-auto flex shrink-0 items-center gap-1 sm:gap-3"><a href="/sign-in" className="flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium hover:bg-slate-50"><Icon name="user"/><span className="hidden sm:inline">Account</span></a><a href="/cart" aria-label={`Cart, ${totalUnits} items`} className="flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium hover:bg-slate-50"><Icon name="cart"/><span className="hidden sm:inline">Cart</span><span aria-live="polite" className="min-w-6 rounded-md bg-blue-50 px-1.5 py-0.5 text-center text-xs font-bold text-brand">{totalUnits}</span></a></nav>
+    </div>
+    <form action="/search" method="get" role="search" className="market-shell flex gap-2 pb-2 md:hidden"><label className="sr-only" htmlFor="search-mobile">Search products</label><div className="flex h-11 min-w-0 flex-1 overflow-hidden rounded-lg border border-slate-300"><input id="search-mobile" name="q" className="min-w-0 flex-1 px-3 text-sm outline-none" placeholder="Search products and protocols"/><button type="submit" aria-label="Search" className="grid w-11 place-items-center bg-slate-50"><Icon name="search"/></button></div></form>
+    <nav id="store-categories" aria-label="Product categories" className={`${menuOpen ? 'block' : 'hidden'} border-t border-slate-100 md:block`}><div className="market-shell flex gap-1 overflow-x-auto py-1.5">{[{ name: 'Shop all', slug: '' }, ...categories.map((item) => ({ name: item.name, slug: item.name.toLowerCase() }))].map((item) => <a key={item.name} onClick={() => setMenuOpen(false)} href={item.slug ? `/categories/${item.slug}` : '/shop'} className="flex min-h-10 shrink-0 items-center rounded-md px-3 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-brand">{item.name}</a>)}</div></nav>
+  </header>;
 }
