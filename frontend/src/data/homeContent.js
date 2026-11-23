@@ -53,5 +53,16 @@ export const productDetails = [
   },
 ];
 
+export const deliveryOptionsBySeller = {
+  'Nile Smart Store': [
+    { id: 'nile-standard', label: 'Standard delivery · 3–5 days', chargeMinor: 3500 },
+    { id: 'nile-express', label: 'Express delivery · 1–2 days', chargeMinor: 6500 },
+  ],
+  'Cairo Connected': [
+    { id: 'cairo-standard', label: 'Standard delivery · 3–5 days', chargeMinor: 4200 },
+    { id: 'cairo-express', label: 'Express delivery · 1–2 days', chargeMinor: 7000 },
+  ],
+};
+
 export const formatPrice = (amount) => `EGP ${amount.toLocaleString('en-EG')}`;
 export const formatMinorUnits = (amount) => `EGP ${(amount / 100).toLocaleString('en-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
