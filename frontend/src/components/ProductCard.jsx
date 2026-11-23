@@ -1,4 +1,4 @@
-﻿import Icon from './Icon.jsx';
+import Icon from './Icon.jsx';
 import { formatPrice, productDetails } from '../data/homeContent.js';
 
 function getProductOffer(device) {
@@ -18,7 +18,7 @@ export default function ProductCard({ device }) {
       <h3 className="line-clamp-2 min-h-11 text-sm font-semibold leading-5 sm:text-base">{device.name}</h3>
       <p className="mt-1 line-clamp-2 min-h-10 text-[13px] leading-5 text-slate-600">{device.detail.replaceAll('Â·', '|')}</p>
       <div className="mt-3 min-h-12">
-        {offer ? <><p className="text-lg font-bold">{formatPrice(offer.price)}</p><p className="mt-0.5 text-xs text-slate-600">Sold by {offer.seller}</p></> : <><p className="text-lg font-bold">{formatPrice(device.price)}</p><p className="mt-0.5 text-xs text-slate-500">Seller offers not listed in preview</p></>}
+        {offer ? <><p className="text-lg font-bold">{formatPrice(offer.price)}</p><p className="mt-0.5 text-xs text-slate-600">Sold by {offer.seller}</p></> : <><p className="text-lg font-bold">{formatPrice(device.price)}</p><p className="mt-0.5 text-xs text-slate-500">Seller information unavailable</p></>}
       </div>
       {detail ? <a href={`/products/${detail.slug}`} className="mt-3 flex min-h-11 items-center justify-center rounded-md bg-brand px-3 text-sm font-semibold text-white hover:bg-blue-800">Choose options</a> : <a href="/shop" className="mt-3 flex min-h-11 items-center justify-center rounded-md border border-slate-300 px-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">View product</a>}
     </div>

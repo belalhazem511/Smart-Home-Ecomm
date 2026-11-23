@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import Icon from '../components/Icon.jsx';
 import StoreHeader from '../components/StoreHeader.jsx';
 import StoreFooter from '../components/StoreFooter.jsx';
@@ -11,7 +11,7 @@ function ProductUnavailable() {
 }
 
 function ProductGallery({ product }) {
-  return <section aria-label="Product images"><div className="product-media rounded-lg border border-slate-200" role="img" aria-label={`Photography for ${product.name} is pending`}><Icon name={product.symbol} className="h-24 w-24 text-slate-400"/></div><p className="mt-2 text-xs text-slate-500">Product photography pending</p></section>;
+  return <section aria-label="Product images"><div className="product-media rounded-lg border border-slate-200"><Icon name={product.symbol} className="h-24 w-24 text-slate-400"/></div></section>;
 }
 
 function SellerOffer({ offer, selected, onSelect }) {
