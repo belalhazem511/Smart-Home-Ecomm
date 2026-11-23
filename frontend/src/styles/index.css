@@ -1,0 +1,27 @@
+﻿@import "tailwindcss";
+
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+@theme {
+  --color-brand: #1d4ed8;
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-canvas: #f8fafc;
+  --max-width-content: 1320px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; }
+.hero-placeholder { background: linear-gradient(135deg, #dce9ea 0%, #d8cfc2 48%, #aab9b3 100%); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
