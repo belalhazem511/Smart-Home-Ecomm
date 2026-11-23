@@ -141,3 +141,11 @@ Review the proposed simple architecture with the user. On subsequent instruction
 - Drafts live in a small shared in-memory seller context and survive portal navigation without changing source fixtures. SKU uniqueness is merchant-scoped; price uses positive integer minor units; warranty is seller-provided text only. Unknown, cross-merchant and published offer IDs cannot be edited. Offers are never published or copied into customer-facing product data. Inventory remains deferred.
 - Focused checks: `npm.cmd test` PASS, 36 tests total, including merchant isolation, product/variant validity, merchant-local SKU uniqueness, money parsing, and draft-only editing. `npm.cmd run build` PASS (Vite 8.3.8). No browser/visual behavior verified; imagery remains `ASSET_PENDING`.
 - Preview data and membership checks are client-side only, with no persistence, authorization, approval, inventory, or backend integration.
+
+## Local demo sign-in for customer and seller previews
+- Offers slice commit `c72d739` (`Add merchant-scoped offer lists and draft offer editing`) was pushed successfully to `origin/integration/storefront-20261123` before this separate preview sign-in change.
+- Reused `/sign-in`. In development only, the supplied fictional demo credentials enable a page-level preview message and direct links to `/account`, `/seller/merchant-nile`, and `/seller/merchant-cairo`. The UI is labeled “Demo preview.” Routes remain unprotected and no authentication is established.
+- Credential comparison code is dynamically imported only inside Vite's development branch. Form values and the preview indicator remain in page memory; no tokens, sessions, stored credentials, or logs are created. Production build inspection confirms the demo email and password are absent from built JavaScript.
+- Focused checks: `npm.cmd test` PASS, 39 tests total, including accepted credentials, incorrect email/password rejection, and disabled mode. `npm.cmd run build` PASS (Vite 8.3.8); production credential absence check PASS. No browser interaction or visual behavior verified. Imagery remains `ASSET_PENDING`.
+- Local development server started and `/sign-in` returned HTTP 200 at `http://127.0.0.1:5173/`.
+- Demo preview does not grant authentication or access control; data remains fictional and frontend-only.
