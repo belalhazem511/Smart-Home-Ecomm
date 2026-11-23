@@ -1,6 +1,7 @@
 export const demoCustomer = {
   name: 'Jordan Lee',
   email: 'jordan.lee@example.test',
+  phone: '01012345678',
   label: 'Fictional demo customer',
 };
 
