@@ -12,6 +12,8 @@ import AccountProfilePage from '../pages/AccountProfilePage.jsx';
 import AccountAddressesPage from '../pages/AccountAddressesPage.jsx';
 import SellerChooserPage from '../pages/SellerChooserPage.jsx';
 import SellerDashboardPage from '../pages/SellerDashboardPage.jsx';
+import SellerOffersPage from '../pages/SellerOffersPage.jsx';
+import SellerOfferEditorPage from '../pages/SellerOfferEditorPage.jsx';
 
 function currentPath() { return window.location.pathname; }
 
@@ -48,6 +50,25 @@ export default function App() {
   if (pathname === '/account/addresses') return <AccountAddressesPage/>;
   if (pathname.startsWith('/account/orders/')) return <OrderDetailPage orderId={decodeURIComponent(pathname.slice('/account/orders/'.length))}/>;
   if (pathname === '/seller') return <SellerChooserPage/>;
+  const sellerOfferCreate = pathname.match(/^\/seller\/([^/]+)\/offers\/new$/);
+  if (sellerOfferCreate) {
+    let merchantId = sellerOfferCreate[1];
+    try { merchantId = decodeURIComponent(merchantId); } catch { /* Keep malformed IDs unavailable. */ }
+    return <SellerOfferEditorPage key={pathname} merchantId={merchantId}/>;
+  }
+  const sellerOfferEdit = pathname.match(/^\/seller\/([^/]+)\/offers\/([^/]+)\/edit$/);
+  if (sellerOfferEdit) {
+    let merchantId = sellerOfferEdit[1];
+    let offerId = sellerOfferEdit[2];
+    try { merchantId = decodeURIComponent(merchantId); offerId = decodeURIComponent(offerId); } catch { /* Keep malformed IDs unavailable. */ }
+    return <SellerOfferEditorPage key={pathname} merchantId={merchantId} offerId={offerId}/>;
+  }
+  const sellerOffers = pathname.match(/^\/seller\/([^/]+)\/offers$/);
+  if (sellerOffers) {
+    let merchantId = sellerOffers[1];
+    try { merchantId = decodeURIComponent(merchantId); } catch { /* Keep malformed IDs unavailable. */ }
+    return <SellerOffersPage key={merchantId} merchantId={merchantId}/>;
+  }
   const sellerRoute = pathname.match(/^\/seller\/([^/]+)$/);
   if (sellerRoute) {
     let merchantId = sellerRoute[1];

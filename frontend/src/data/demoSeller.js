@@ -15,3 +15,10 @@ export const demoSellerOrders = [
   { id: 'seller-cairo-2081', merchantId: 'merchant-cairo', sellerOrderNumber: 'CC-2081', createdAt: '2026-11-21', itemCount: 1, itemsTotalMinor: 249000, orderStatus: 'Confirmed (demo)', paymentStatus: 'Pending payment (demo)', processingStatus: 'Waiting for payment' },
   { id: 'seller-cairo-2074', merchantId: 'merchant-cairo', sellerOrderNumber: 'CC-2074', createdAt: '2026-11-18', itemCount: 2, itemsTotalMinor: 144000, orderStatus: 'Confirmed (demo)', paymentStatus: 'Paid (demo)', processingStatus: 'Ready for processing' },
 ];
+
+export const demoSellerOffers = [
+  { id: 'offer-published-nile-switch', merchantId: 'merchant-nile', productId: 'touch-switch', variantId: 'touch-switch-3g', sellerSku: 'NSS-SW-3G', priceMinor: 149000, warranty: 'Seller warranty details not supplied in this preview.', status: 'Published' },
+  { id: 'offer-published-nile-plug', merchantId: 'merchant-nile', productId: 'wifi-plug', variantId: 'wifi-plug-eu', sellerSku: 'NSS-PLUG-EU', priceMinor: 64900, warranty: 'Seller warranty details not supplied in this preview.', status: 'Published' },
+  { id: 'offer-published-cairo-switch', merchantId: 'merchant-cairo', productId: 'touch-switch', variantId: 'touch-switch-2g', sellerSku: 'CC-SW-2G', priceMinor: 137500, warranty: 'Seller warranty details not supplied in this preview.', status: 'Published' },
+  { id: 'offer-published-cairo-sensor', merchantId: 'merchant-cairo', productId: 'motion-sensor', variantId: 'motion-sensor-standard', sellerSku: 'CC-SENSOR-01', priceMinor: 94000, warranty: 'Seller warranty details not supplied in this preview.', status: 'Published' },
+];
