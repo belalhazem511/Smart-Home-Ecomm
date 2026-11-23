@@ -104,3 +104,12 @@ Review the proposed simple architecture with the user. On subsequent instruction
 - Checkout uses in-memory address values, separate per-seller fixture delivery choices/charges, integer minor-unit item/delivery/estimated totals, selection-only COD/card methods, and a disabled final submission. Empty, stale or invalid cart entries show an unavailable state. No auth, order creation, payment, stock reservation or cart clearing occurs.
 - `npm.cmd test`: PASS, 14 total tests; focused cases cover required address validation, step guards, seller delivery charges/totals and empty/invalid carts. `npm.cmd run build`: PASS (Vite 8.3.8). No browser or visual checks performed. Assets remain `ASSET_PENDING`.
 - Next workflow: commit this bounded feature on the current integration branch and attempt one normal push.
+
+## Authentication UI slice
+- User confirmed the previous checkout commit was pushed. Working branch remains `integration/storefront-20261123`; the two unrelated reference files remain untouched and uncommitted.
+- Added `/sign-in`, `/sign-up`, and `/forgot-password` using one responsive AuthLayout. Header Sign in is enabled. Forms include semantic labels, autocomplete, inline validation, cross-links and an accessible show/hide password control.
+- Forms validate locally and state clearly that authentication/recovery is unavailable. No sessions/tokens/accounts/recovery messages are simulated; passwords remain component memory only and are never logged or persisted. Customer account pages and backend integration remain deferred.
+- Validation follows `04_SECURITY.md`: provisional UI sign-up password length 15–128 characters (never truncated). Server-side common/breached-password rejection, credential hashing, verification and bounded recovery remain backend requirements. Sign-in requires nonempty password; email uses basic format validation.
+- `npm.cmd test`: PASS, 19 tests including auth email, required fields, password length and confirmation cases. `npm.cmd run build`: PASS (Vite 8.3.8). No browser/visual verification performed; assets remain `ASSET_PENDING`.
+- Commit naming preference: descriptive English titles explaining the change. Use exactly `Add sign-in, sign-up, and password recovery screens` when these three screens are complete. Include changes, checks and limitations in the commit body; follow this preference for future commits.
+- Next workflow: commit this auth UI slice and push the existing integration branch.

@@ -4,6 +4,7 @@ import CatalogPage from '../pages/CatalogPage.jsx';
 import ProductPage from '../pages/ProductPage.jsx';
 import CartPage from '../pages/CartPage.jsx';
 import CheckoutPage from '../pages/CheckoutPage.jsx';
+import AuthPage from '../pages/AuthPage.jsx';
 
 function currentPath() { return window.location.pathname; }
 
@@ -33,5 +34,6 @@ export default function App() {
   if (pathname.startsWith('/products/')) return <ProductPage key={pathname} pathname={pathname}/>;
   if (pathname === '/cart') return <CartPage/>;
   if (pathname === '/checkout') return <CheckoutPage/>;
+  if (pathname === '/sign-in' || pathname === '/sign-up' || pathname === '/forgot-password') return <AuthPage key={pathname} pathname={pathname}/>;
   return <HomePage/>;
 }
