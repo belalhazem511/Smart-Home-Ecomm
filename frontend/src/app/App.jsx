@@ -14,6 +14,7 @@ import SellerChooserPage from '../pages/SellerChooserPage.jsx';
 import SellerDashboardPage from '../pages/SellerDashboardPage.jsx';
 import SellerOffersPage from '../pages/SellerOffersPage.jsx';
 import SellerOfferEditorPage from '../pages/SellerOfferEditorPage.jsx';
+import AdminPreviewPage from '../pages/AdminPreviewPage.jsx';
 
 function currentPath() { return window.location.pathname; }
 
@@ -50,6 +51,7 @@ export default function App() {
   if (pathname === '/account/addresses') return <AccountAddressesPage/>;
   if (pathname.startsWith('/account/orders/')) return <OrderDetailPage orderId={decodeURIComponent(pathname.slice('/account/orders/'.length))}/>;
   if (pathname === '/seller') return <SellerChooserPage/>;
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) return <AdminPreviewPage key={pathname} pathname={pathname}/>;
   const sellerOfferCreate = pathname.match(/^\/seller\/([^/]+)\/offers\/new$/);
   if (sellerOfferCreate) {
     let merchantId = sellerOfferCreate[1];
