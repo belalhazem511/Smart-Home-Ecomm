@@ -18,6 +18,7 @@ function FilterFields({ filters, onChange }) {
 
 function ActiveFilters({ filters, onRemove }) {
   const active = [
+    filters.query && ['Search', filters.query, 'query'],
     filters.connectivity && ['Protocol', filters.connectivity, 'connectivity'],
     filters.hub && ['Hub', filters.hub === 'required' ? 'Required' : 'Not required', 'hub'],
     filters.minPrice && ['From', `EGP ${filters.minPrice}`, 'minPrice'],
