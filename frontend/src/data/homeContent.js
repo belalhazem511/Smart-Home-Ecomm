@@ -21,9 +21,10 @@ export const featuredDevices = [
 export const productDetails = [
   {
     slug: 'zigbee-touch-switch', productId: 'touch-switch', variantId: 'touch-switch-3g',
+    description: 'Three-gang touch switch with Zigbee connectivity. Neutral wiring and a compatible hub are required according to the product specifications.',
     variants: [
-      { id: 'touch-switch-3g', label: '3 gang', specs: ['Zigbee', 'Neutral wire required', 'Hub required'] },
-      { id: 'touch-switch-2g', label: '2 gang', specs: ['Zigbee', 'Neutral wire required', 'Hub required'] },
+      { id: 'touch-switch-3g', label: '3 gang', image: '/assets/products/touch-switch-3-gang-front.webp', imageAlt: 'Three-gang Zigbee touch switch, front view', specs: ['Zigbee', 'Neutral wire required', 'Hub required'] },
+      { id: 'touch-switch-2g', label: '2 gang', image: '/assets/products/touch-switch-2-gang-front.webp', imageAlt: 'Two-gang Zigbee touch switch, front view', specs: ['Zigbee', 'Neutral wire required', 'Hub required'] },
     ],
     offers: [
       { id: 'switch-offer-a', variantId: 'touch-switch-3g', seller: 'Nile Smart Store', price: 1490, warranty: '12-month seller warranty', available: true },
@@ -34,9 +35,10 @@ export const productDetails = [
   },
   {
     slug: 'smart-wi-fi-plug', productId: 'wifi-plug', variantId: 'wifi-plug-eu',
+    description: 'Wi-Fi smart plug offered in EU and UK plug variants. Check the outlet and plug type required for your installation.',
     variants: [
-      { id: 'wifi-plug-eu', label: 'EU plug', specs: ['Wi-Fi', 'No hub required', 'Check outlet compatibility'] },
-      { id: 'wifi-plug-uk', label: 'UK plug', specs: ['Wi-Fi', 'No hub required', 'Check outlet compatibility'] },
+      { id: 'wifi-plug-eu', label: 'EU plug', image: '/assets/products/wifi-plug-eu-front.webp', imageAlt: 'Smart Wi-Fi plug, EU variant, front view', specs: ['Wi-Fi', 'No hub required', 'Check outlet compatibility'] },
+      { id: 'wifi-plug-uk', label: 'UK plug', image: '/assets/products/wifi-plug-uk-front.webp', imageAlt: 'Smart Wi-Fi plug, UK variant, front view', specs: ['Wi-Fi', 'No hub required', 'Check outlet compatibility'] },
     ],
     offers: [
       { id: 'plug-offer-eu', variantId: 'wifi-plug-eu', seller: 'Nile Smart Store', price: 649, warranty: '12-month seller warranty', available: true },
@@ -45,7 +47,8 @@ export const productDetails = [
   },
   {
     slug: 'motion-sensor', productId: 'motion-sensor', variantId: 'motion-sensor-standard',
-    variants: [{ id: 'motion-sensor-standard', label: 'Standard', specs: ['Zigbee', 'Hub required', 'Motion detection range not verified'] }],
+    description: 'Standard Zigbee motion sensor. A compatible hub is listed as required; motion detection range is not verified in the fixture.',
+    variants: [{ id: 'motion-sensor-standard', label: 'Standard', image: '/assets/products/motion-sensor-front.webp', imageAlt: 'Zigbee motion sensor, front view', specs: ['Zigbee', 'Hub required', 'Motion detection range not verified'] }],
     offers: [
       { id: 'sensor-offer-a', variantId: 'motion-sensor-standard', seller: 'Nile Smart Store', price: 890, warranty: '12-month seller warranty', available: true },
       { id: 'sensor-offer-b', variantId: 'motion-sensor-standard', seller: 'Cairo Connected', price: 940, warranty: 'Warranty terms not provided', available: false },

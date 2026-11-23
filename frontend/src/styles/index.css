@@ -59,6 +59,7 @@ button:disabled { cursor: not-allowed; opacity: .62; }
 .home-hero-image { min-height: 350px; background: linear-gradient(115deg, #dce5e5, #ded5ca 58%, #b9c8c1); }
 .product-card-image { height: 198px; background: linear-gradient(135deg, #fff, #f1f4f7); }
 .category-image { height: 132px; background: #f1f4f7; }
+.product-gallery-frame { aspect-ratio: 1 / 1; min-height: 280px; max-height: 720px; }
 .portal-frame { min-height: 100vh; background: var(--canvas); }
 .portal-topbar { min-height: 64px; border-bottom: 1px solid var(--line); background: #fff; }
 .portal-workspace { display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: 24px; padding: 24px; }
