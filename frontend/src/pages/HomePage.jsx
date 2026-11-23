@@ -4,32 +4,57 @@ import ProductImage from '../components/ProductImage.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 import { categories, featuredDevices, productDetails } from '../data/homeContent.js';
 
-const promotedProducts = featuredDevices.filter((device) => productDetails.some((detail) => detail.productId === device.id));
+const promotedProducts = featuredDevices.filter((device) =>
+  productDetails.some((detail) => detail.productId === device.id),
+);
 
-function CategoryLinks() {
+function HomeHero() {
   return (
-    <section id="categories" className="mt-8">
-      <div className="flex flex-wrap items-end justify-between gap-2">
-        <div>
-          <p className="text-sm font-medium text-slate-600">Find what fits your home</p>
-          <h2 className="mt-1 text-2xl font-bold tracking-tight sm:text-[26px]">Shop by category</h2>
-        </div>
-        <a href="/shop" className="button-quiet">Shop all</a>
+    <section className="home-hero overflow-hidden rounded-2xl bg-slate-950 text-white">
+      <div className="home-hero-copy">
+        <p className="text-sm font-semibold uppercase tracking-widest text-blue-200">
+          Thoughtful technology, made simple
+        </p>
+        <h1 className="mt-3 text-4xl font-extrabold leading-tight sm:text-5xl">
+          A smarter home.<br/>Made simple.
+        </h1>
+        <p className="mt-4 text-lg text-slate-200">Find the right devices for every room.</p>
+        <a href="/shop" className="button-primary mt-6 min-h-12 px-6 font-semibold">
+          Shop smart home
+        </a>
+        <a href="#categories" className="mt-3 inline-flex min-h-11 items-center py-2 font-medium text-white">
+          Explore categories <span aria-hidden="true" className="ml-2">→</span>
+        </a>
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <ProductImage
+        src="/assets/campaign/smart-home-living-room.webp"
+        alt="Smart-home living room"
+        className="home-hero-image"
+        imageClassName="h-full w-full object-cover"
+      />
+    </section>
+  );
+}
+
+function CategoryGrid() {
+  return (
+    <section id="categories" className="mt-9 scroll-mt-6 md:mt-12">
+      <h2 className="text-2xl font-bold md:text-3xl">Build your smart home</h2>
+      <p className="mt-1 text-slate-600">Browse by device</p>
+      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
         {categories.map((category) => (
           <a
             href={`/categories/${category.name.toLowerCase()}`}
             key={category.name}
-            className="group overflow-hidden rounded-lg border border-slate-200 bg-white transition-colors hover:border-slate-300"
+            className="overflow-hidden rounded-xl border border-slate-200 bg-white text-center transition-shadow hover:shadow-md"
           >
             <ProductImage
               src={category.image}
               alt={category.imageAlt}
               className="category-image"
-              imageClassName="h-full w-full object-contain p-4 transition-transform duration-200 group-hover:scale-105"
+              imageClassName="h-full w-full object-contain p-3"
             />
-            <span className="flex min-h-11 items-center justify-center border-t border-slate-100 px-2 text-sm font-semibold">
+            <span className="flex min-h-11 items-center justify-center border-t border-slate-100 px-2 font-semibold">
               {category.name}
             </span>
           </a>
@@ -39,65 +64,46 @@ function CategoryLinks() {
   );
 }
 
-function HomeHero() {
-  return (
-    <section className="home-hero overflow-hidden rounded-xl bg-slate-950">
-      <div className="home-hero-copy">
-        <p className="text-xs font-bold uppercase tracking-[.14em] text-blue-200">Smart home essentials</p>
-        <h1 className="mt-3 max-w-xl text-3xl font-bold leading-tight text-white sm:text-4xl">
-          A smarter home.<br/>Made simple.
-        </h1>
-        <p className="mt-3 max-w-md text-base leading-6 text-slate-200">
-          Find connected devices that fit your rooms, routines and setup.
-        </p>
-        <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <a href="/shop" className="button-primary min-h-11">Shop smart home</a>
-          <a href="#categories" className="inline-flex min-h-11 items-center text-sm font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">
-            Explore categories
-          </a>
-        </div>
-      </div>
-      <ProductImage
-        src="/assets/campaign/smart-home-living-room.webp"
-        alt="Contemporary living room with connected smart-home devices"
-        className="home-hero-image"
-        imageClassName="h-full w-full object-cover"
-      />
-    </section>
-  );
-}
-
 function FeaturedDevices() {
   return (
-    <section id="featured" className="mt-8">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="text-sm font-medium text-slate-600">Considered choices for everyday comfort</p>
-          <h2 className="mt-1 text-2xl font-bold tracking-tight sm:text-[26px]">Featured devices</h2>
-        </div>
-        <a href="/shop" className="button-quiet">View all products</a>
+    <section id="featured" className="mt-10 scroll-mt-6 md:mt-14">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <h2 className="text-2xl font-bold md:text-3xl">Featured devices</h2>
+        <a href="/shop" className="min-h-11 py-2 font-medium text-brand">View all products</a>
       </div>
-      <div className="mt-4 grid grid-cols-1 justify-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto mt-5 grid max-w-5xl grid-cols-1 justify-items-center gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3">
         {promotedProducts.map((device) => <ProductCard key={device.id} device={device}/>) }
       </div>
     </section>
   );
 }
 
+function CompatibilityPanel() {
+  return (
+    <section className="mt-10 grid gap-5 rounded-2xl border border-blue-100 bg-blue-50 p-6 sm:p-8 md:mt-14 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <h2 className="text-2xl font-bold">Not sure what works together?</h2>
+        <p className="mt-2 text-slate-700">Check hub, protocol and wiring requirements before you buy.</p>
+        <ul className="mt-4 flex flex-wrap gap-2" aria-label="Protocols available in the product fixtures">
+          <li className="rounded-full border border-slate-300 bg-white px-4 py-2">Wi-Fi</li>
+          <li className="rounded-full border border-slate-300 bg-white px-4 py-2">Zigbee</li>
+          <li className="rounded-full border border-slate-300 bg-white px-4 py-2">Thread</li>
+        </ul>
+      </div>
+      <a href="/shop" className="button-primary min-h-11 px-5 font-semibold">Browse devices</a>
+    </section>
+  );
+}
+
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div id="home" className="min-h-screen">
       <StoreHeader/>
-      <main className="market-shell py-4 sm:py-6">
+      <main className="market-shell pb-10 pt-4 sm:pt-6">
         <HomeHero/>
-        <CategoryLinks/>
+        <CategoryGrid/>
         <FeaturedDevices/>
-        <section id="help" className="mt-8 rounded-lg border border-slate-200 bg-slate-50 px-5 py-4">
-          <h2 className="text-base font-semibold">Check product requirements before buying</h2>
-          <p className="mt-1 text-sm text-slate-600">
-            Review the protocol, hub and installation details on each product page. Compatibility is listed as unknown when fixture information is unavailable.
-          </p>
-        </section>
+        <CompatibilityPanel/>
       </main>
       <StoreFooter/>
     </div>

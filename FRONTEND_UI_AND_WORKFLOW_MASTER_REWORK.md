@@ -1,5 +1,7 @@
 # Smart Home Marketplace — UI and Workflow Master Rework
 
+> **Visual direction update (2026-11-23):** For the Home page and shared storefront product cards, the current authority is the owner's screenshot `references/Screenshot 2026-11-23 064807.png` and the latest visual decision in `project_state.md`. Earlier homepage visual prescriptions in this master (including any light/cyan treatment or text-only/compact-hero fallback) are superseded for these surfaces. Restore the navy copy panel, right-hand image area and earlier section order; do not show `ASSET_PENDING` in customer-facing copy. Keep this document's route, workflow, business, backend, security, and other nonvisual requirements active. This note preserves the earlier visual guidance as historical source material.
+
 **Language:** English first, LTR. Arabic/RTL comes after the English experience is complete and reviewed.
 
 **Audience:** The Codex agent working in B:\Smart_Home_Vibe_Coding_Pack (2).
@@ -14,7 +16,7 @@
 
 ## 00. Read this before implementing
 
-This document replaces the earlier small visual-correction brief. It is the comprehensive frontend requirements and gap-audit brief. It does not authorize inventing completed payment processing, authentication, legal compliance, shipment execution, or money transfers.
+This document remains the comprehensive frontend workflow and gap-audit brief. Its earlier Home and shared-card visual direction is superseded by the owner's selected screenshot, as recorded above and in `project_state.md`; the nonvisual requirements remain active. It does not authorize inventing completed payment processing, authentication, legal compliance, shipment execution, or money transfers.
 
 Use the supplied local screenshots and project documents as visual evidence. Do not browse competitor websites, use browser automation, or generate images. The comparisons below describe established marketplace patterns; they are not a fresh audit of Amazon or Noon, and they do not assert that every competitor uses every feature or policy.
 
