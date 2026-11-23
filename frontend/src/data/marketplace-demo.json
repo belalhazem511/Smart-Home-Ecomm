@@ -63,7 +63,7 @@
     {
       "id": "customer-demo",
       "name": "Mariam Adel",
-      "email": "demo@smarthome.test",
+      "email": "demo@smartatlas.test",
       "phone": "+12025550100",
       "role": "customer",
       "status": "active",
@@ -74,7 +74,7 @@
     {
       "id": "customer-02",
       "name": "Omar Samir",
-      "email": "customer02@smarthome.test",
+      "email": "customer02@smartatlas.test",
       "phone": "+12025550101",
       "role": "customer",
       "status": "active",
@@ -85,7 +85,7 @@
     {
       "id": "customer-03",
       "name": "Nour Hesham",
-      "email": "customer03@smarthome.test",
+      "email": "customer03@smartatlas.test",
       "phone": "+12025550102",
       "role": "customer",
       "status": "active",
@@ -96,7 +96,7 @@
     {
       "id": "customer-04",
       "name": "Youssef Tarek",
-      "email": "customer04@smarthome.test",
+      "email": "customer04@smartatlas.test",
       "phone": "+12025550103",
       "role": "customer",
       "status": "active",
@@ -107,7 +107,7 @@
     {
       "id": "customer-05",
       "name": "Salma Nabil",
-      "email": "customer05@smarthome.test",
+      "email": "customer05@smartatlas.test",
       "phone": "+12025550104",
       "role": "customer",
       "status": "active",
@@ -118,7 +118,7 @@
     {
       "id": "customer-06",
       "name": "Karim Fathy",
-      "email": "customer06@smarthome.test",
+      "email": "customer06@smartatlas.test",
       "phone": "+12025550105",
       "role": "customer",
       "status": "active",
@@ -129,7 +129,7 @@
     {
       "id": "customer-07",
       "name": "Dina Ashraf",
-      "email": "customer07@smarthome.test",
+      "email": "customer07@smartatlas.test",
       "phone": "+12025550106",
       "role": "customer",
       "status": "active",
@@ -140,7 +140,7 @@
     {
       "id": "customer-08",
       "name": "Ahmed Wael",
-      "email": "customer08@smarthome.test",
+      "email": "customer08@smartatlas.test",
       "phone": "+12025550107",
       "role": "customer",
       "status": "active",
@@ -151,7 +151,7 @@
     {
       "id": "customer-09",
       "name": "Hana Sherif",
-      "email": "customer09@smarthome.test",
+      "email": "customer09@smartatlas.test",
       "phone": "+12025550108",
       "role": "customer",
       "status": "active",
@@ -162,7 +162,7 @@
     {
       "id": "customer-10",
       "name": "Mostafa Emad",
-      "email": "customer10@smarthome.test",
+      "email": "customer10@smartatlas.test",
       "phone": "+12025550109",
       "role": "customer",
       "status": "active",
@@ -173,7 +173,7 @@
     {
       "id": "customer-11",
       "name": "Laila Amr",
-      "email": "customer11@smarthome.test",
+      "email": "customer11@smartatlas.test",
       "phone": "+12025550110",
       "role": "customer",
       "status": "active",
@@ -184,7 +184,7 @@
     {
       "id": "customer-12",
       "name": "Ziad Hany",
-      "email": "customer12@smarthome.test",
+      "email": "customer12@smartatlas.test",
       "phone": "+12025550111",
       "role": "customer",
       "status": "suspended",
@@ -195,7 +195,7 @@
     {
       "id": "seller-owner-01",
       "name": "Adam Nader",
-      "email": "nile-smart-store@merchants.smarthome.test",
+      "email": "nile-smart-store@merchants.smartatlas.test",
       "phone": "+12025550120",
       "role": "seller",
       "merchantId": "merchant-nile",
@@ -206,7 +206,7 @@
     {
       "id": "seller-owner-02",
       "name": "Farah Khaled",
-      "email": "cairo-connected@merchants.smarthome.test",
+      "email": "cairo-connected@merchants.smartatlas.test",
       "phone": "+12025550121",
       "role": "seller",
       "merchantId": "merchant-cairo",
@@ -217,7 +217,7 @@
     {
       "id": "seller-owner-03",
       "name": "Tamer Waleed",
-      "email": "delta-home-tech@merchants.smarthome.test",
+      "email": "delta-home-tech@merchants.smartatlas.test",
       "phone": "+12025550122",
       "role": "seller",
       "merchantId": "merchant-delta",
@@ -228,7 +228,7 @@
     {
       "id": "seller-owner-04",
       "name": "Nada Sameh",
-      "email": "connected-living@merchants.smarthome.test",
+      "email": "connected-living@merchants.smartatlas.test",
       "phone": "+12025550123",
       "role": "seller",
       "merchantId": "merchant-living",
@@ -239,7 +239,7 @@
     {
       "id": "admin-demo",
       "name": "Demo Operations",
-      "email": "admin@smarthome.test",
+      "email": "admin@smartatlas.test",
       "role": "admin",
       "status": "active",
       "createdAt": "2026-08-01T10:00:00Z",
@@ -248,7 +248,7 @@
     {
       "id": "applicant-owner-1",
       "name": "Demo Eco Rooms",
-      "email": "applicant1@smarthome.test",
+      "email": "applicant1@smartatlas.test",
       "role": "seller_applicant",
       "status": "active",
       "createdAt": "2026-11-17T10:00:00Z",
@@ -257,7 +257,7 @@
     {
       "id": "applicant-owner-2",
       "name": "Demo Urban Automations",
-      "email": "applicant2@smarthome.test",
+      "email": "applicant2@smartatlas.test",
       "role": "seller_applicant",
       "status": "active",
       "createdAt": "2026-11-18T10:00:00Z",
@@ -266,7 +266,7 @@
     {
       "id": "applicant-owner-3",
       "name": "Demo Home Circuit",
-      "email": "applicant3@smarthome.test",
+      "email": "applicant3@smartatlas.test",
       "role": "seller_applicant",
       "status": "active",
       "createdAt": "2026-11-19T10:00:00Z",
@@ -283,7 +283,7 @@
       "description": "Touch controls, sensors and everyday automation.",
       "status": "active",
       "logo": "/assets/merchants/nile-smart-store.svg",
-      "email": "nile-smart-store@merchants.smarthome.test",
+      "email": "nile-smart-store@merchants.smartatlas.test",
       "joinedAt": "2026-08-01T10:00:00Z",
       "deliveryFeeMinor": 5500,
       "commissionBasisPoints": 1000,
@@ -300,7 +300,7 @@
       "description": "Hubs, connected lighting and room controls.",
       "status": "active",
       "logo": "/assets/merchants/cairo-connected.svg",
-      "email": "cairo-connected@merchants.smarthome.test",
+      "email": "cairo-connected@merchants.smartatlas.test",
       "joinedAt": "2026-08-01T10:00:00Z",
       "deliveryFeeMinor": 6500,
       "commissionBasisPoints": 1000,
@@ -317,7 +317,7 @@
       "description": "Practical devices for connected apartments.",
       "status": "active",
       "logo": "/assets/merchants/delta-home-tech.svg",
-      "email": "delta-home-tech@merchants.smarthome.test",
+      "email": "delta-home-tech@merchants.smartatlas.test",
       "joinedAt": "2026-08-01T10:00:00Z",
       "deliveryFeeMinor": 7500,
       "commissionBasisPoints": 1000,
@@ -334,7 +334,7 @@
       "description": "Home access, cameras and complete room control.",
       "status": "active",
       "logo": "/assets/merchants/connected-living.svg",
-      "email": "connected-living@merchants.smarthome.test",
+      "email": "connected-living@merchants.smartatlas.test",
       "joinedAt": "2026-08-01T10:00:00Z",
       "deliveryFeeMinor": 8500,
       "commissionBasisPoints": 1000,

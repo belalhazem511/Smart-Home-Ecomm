@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { addCartEntry, restoreCartEntries, setCartQuantity, validateCartEntry } from '../lib/cart.js';
-import { productDetails } from '../data/homeContent.js';
-import { demoSampleCart } from '../data/marketplaceDemo.js';
+import { productDetails, sampleCart } from '../data/smartAtlasCatalog.js';
 
 const CartContext = createContext(null);
 const storageKey = 'smart-home-cart-v1';
@@ -27,7 +26,7 @@ export function CartProvider({ children }) {
     hadInvalidEntries: initialCart.hadInvalidEntries,
     totalUnits: entries.reduce((sum, entry) => sum + entry.quantity, 0),
     addItem: (entry) => setEntries((current) => addCartEntry(current, entry, productDetails)),
-    loadSampleCart: () => setEntries((current) => current.length ? current : demoSampleCart.reduce((next, entry) => addCartEntry(next, entry, productDetails), [])),
+    loadSampleCart: () => setEntries((current) => current.length ? current : sampleCart.reduce((next, entry) => addCartEntry(next, entry, productDetails), [])),
     changeQuantity: (offerId, variantId, quantity) => setEntries((current) => setCartQuantity(current, offerId, variantId, quantity)),
     removeItem: (offerId, variantId) => setEntries((current) => current.filter((entry) => entry.offerId !== offerId || entry.variantId !== variantId)),
   }), [entries]);

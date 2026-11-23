@@ -46,5 +46,60 @@ export default function AccountAddressesPage() {
     setErrors((current) => ({ ...current, [field]: undefined }));
   }
 
-  return <AccountLayout active="addresses"><h1 className="text-2xl font-bold sm:text-3xl">Shipping addresses</h1><p className="mt-2 text-slate-600">Saved addresses stay in memory for this demo session only.</p><div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-start"><section className="space-y-3" aria-label="Saved addresses">{addresses.length ? addresses.map((address) => <article key={address.id} className="rounded-lg border border-slate-200 bg-white p-4"><div className="flex flex-wrap items-center justify-between gap-2"><h2 className="font-semibold">{address.fullName}</h2>{address.isDefault && <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-brand">Default</span>}</div><p className="mt-2 text-sm text-slate-700">{address.phone}<br/>{address.street}{address.apartment ? `, ${address.apartment}` : ''}<br/>{address.city}</p><div className="mt-4 flex flex-wrap gap-2"><button type="button" onClick={() => editAddress(address)} className="min-h-10 rounded-lg border border-slate-400 px-3 text-sm">Edit</button>{!address.isDefault && <button type="button" onClick={() => setDefaultAddress(address.id)} className="min-h-10 rounded-lg border border-slate-400 px-3 text-sm">Make default</button>}<button type="button" onClick={() => setConfirmDeleteId(address.id)} className="min-h-10 rounded-lg px-3 text-sm text-red-700 underline">Remove</button></div>{confirmDeleteId === address.id && <div role="alertdialog" aria-labelledby={`delete-title-${address.id}`} className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3"><p id={`delete-title-${address.id}`} className="font-medium">Remove this address?</p><div className="mt-3 flex gap-2"><button type="button" onClick={() => { deleteSavedAddress(address.id); setConfirmDeleteId(''); if (editingId === address.id) resetForm(); }} className="min-h-10 rounded-lg bg-red-700 px-3 text-sm font-semibold text-white">Confirm remove</button><button type="button" onClick={() => setConfirmDeleteId('')} className="min-h-10 rounded-lg border border-slate-400 px-3 text-sm">Cancel</button></div></div>}</article>) : <div className="rounded-lg border border-dashed border-slate-300 bg-white p-6"><h2 className="font-semibold">No saved addresses</h2><p className="mt-2 text-sm text-slate-600">Add an address to make it available in this demo session.</p></div>}</section><form onSubmit={saveAddress} noValidate className="rounded-lg border border-slate-200 bg-white p-5"><h2 className="text-xl font-semibold">{editingId ? 'Edit address' : 'Add an address'}</h2><div className="mt-4 space-y-4">{fields.map((field) => <label key={field.name} className="block text-sm font-medium" htmlFor={`address-${field.name}`}>{field.label}<input id={`address-${field.name}`} autoComplete={field.autocomplete} type={field.type || 'text'} required={field.required !== false} value={values[field.name]} onChange={(event) => updateField(field.name, event.target.value)} aria-invalid={Boolean(errors[field.name])} aria-describedby={errors[field.name] ? `address-${field.name}-error` : undefined} className="mt-1 min-h-11 w-full rounded-lg border border-slate-400 bg-white px-3 font-normal"/>{errors[field.name] && <span id={`address-${field.name}-error`} role="alert" className="mt-1 block text-sm text-red-700">{errors[field.name]}</span>}</label>)}</div><div className="mt-5 flex flex-wrap gap-3"><button type="submit" className="min-h-11 rounded-lg bg-brand px-5 font-semibold text-white">{editingId ? 'Save address' : 'Add address'}</button>{editingId && <button type="button" onClick={resetForm} className="min-h-11 rounded-lg border border-slate-400 px-5">Cancel</button>}</div>{message && <p role="status" className="mt-4 rounded-lg bg-blue-50 p-3 text-sm text-slate-700">{message}</p>}</form></div></AccountLayout>;
+  return (
+    <AccountLayout active="addresses">
+      <h1 className="text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">Shipping addresses</h1>
+      <p className="mt-2 text-sm text-slate-600">Saved addresses stay in memory for this demo session only.</p>
+      <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+        <section className="space-y-4" aria-label="Saved addresses">
+          {addresses.length ? addresses.map((address) => (
+            <article key={address.id} className="rounded-2xl border border-slate-200 bg-white p-5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h2 className="text-base font-bold text-ink">{address.fullName}</h2>
+                {address.isDefault && <span className="rounded-full bg-brand-light px-3 py-1 text-xs font-bold text-brand ring-1 ring-inset ring-blue-100">Default</span>}
+              </div>
+              <p className="mt-3 text-sm leading-6 text-slate-700">{address.phone}<br/>{address.street}{address.apartment ? `, ${address.apartment}` : ''}<br/>{address.city}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <button type="button" onClick={() => editAddress(address)} className="button-secondary px-3 text-sm">Edit</button>
+                {!address.isDefault && <button type="button" onClick={() => setDefaultAddress(address.id)} className="button-secondary px-3 text-sm">Make default</button>}
+                <button type="button" onClick={() => setConfirmDeleteId(address.id)} className="inline-flex min-h-11 items-center justify-center rounded-lg px-3 text-sm font-semibold text-red-700 underline hover:bg-red-50 hover:text-red-700">Remove</button>
+              </div>
+              {confirmDeleteId === address.id && (
+                <div role="alertdialog" aria-labelledby={`delete-title-${address.id}`} className="mt-4 rounded-xl border border-red-200 bg-red-50 p-4">
+                  <p id={`delete-title-${address.id}`} className="font-semibold text-red-900">Remove this address?</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <button type="button" onClick={() => { deleteSavedAddress(address.id); setConfirmDeleteId(''); if (editingId === address.id) resetForm(); }} className="inline-flex min-h-11 items-center justify-center rounded-lg bg-red-700 px-3 text-sm font-semibold text-white hover:bg-red-800">Confirm remove</button>
+                    <button type="button" onClick={() => setConfirmDeleteId('')} className="button-secondary px-3 text-sm">Cancel</button>
+                  </div>
+                </div>
+              )}
+            </article>
+          )) : (
+            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-6">
+              <h2 className="font-bold text-ink">No saved addresses</h2>
+              <p className="mt-2 text-sm text-slate-600">Add an address to make it available in this demo session.</p>
+            </div>
+          )}
+        </section>
+
+        <form onSubmit={saveAddress} noValidate className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
+          <h2 className="text-xl font-extrabold tracking-tight text-ink">{editingId ? 'Edit address' : 'Add an address'}</h2>
+          <div className="mt-5 space-y-5">
+            {fields.map((field) => (
+              <label key={field.name} className="block text-sm font-semibold text-ink" htmlFor={`address-${field.name}`}>
+                {field.label}
+                <input id={`address-${field.name}`} autoComplete={field.autocomplete} type={field.type || 'text'} required={field.required !== false} value={values[field.name]} onChange={(event) => updateField(field.name, event.target.value)} aria-invalid={Boolean(errors[field.name])} aria-describedby={errors[field.name] ? `address-${field.name}-error` : undefined} className="field-control mt-1.5 min-h-11 font-normal" />
+                {errors[field.name] && <span id={`address-${field.name}-error`} role="alert" className="mt-1.5 block text-sm font-medium text-red-700">{errors[field.name]}</span>}
+              </label>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button type="submit" className="button-primary min-h-11 px-6">{editingId ? 'Save address' : 'Add address'}</button>
+            {editingId && <button type="button" onClick={resetForm} className="button-secondary min-h-11 px-6">Cancel</button>}
+          </div>
+          {message && <p role="status" className="mt-4 rounded-xl border border-blue-100 bg-brand-light p-3.5 text-sm font-medium text-slate-700">{message}</p>}
+        </form>
+      </div>
+    </AccountLayout>
+  );
 }

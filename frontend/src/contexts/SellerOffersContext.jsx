@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import { demoSellerDraftOffers, demoSellerOffers } from '../data/marketplaceDemo.js';
-import { productDetails } from '../data/homeContent.js';
+import { productDetails } from '../data/smartAtlasCatalog.js';
 import { createOfferDraft, updateOfferDraft } from '../lib/sellerOffers.js';
 
 const SellerOffersContext = createContext(null);

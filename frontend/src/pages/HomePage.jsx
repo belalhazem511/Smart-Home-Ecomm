@@ -2,61 +2,97 @@ import StoreHeader from '../components/StoreHeader.jsx';
 import StoreFooter from '../components/StoreFooter.jsx';
 import ProductImage from '../components/ProductImage.jsx';
 import ProductCard from '../components/ProductCard.jsx';
-import { categories, featuredDevices, productDetails } from '../data/homeContent.js';
+import Icon from '../components/Icon.jsx';
+import { categories, featuredDevices } from '../data/smartAtlasCatalog.js';
 
-const promotedProducts = featuredDevices.filter((device) =>
-  productDetails.some((detail) => detail.productId === device.id),
-).slice(0, 3);
+const productImageFor = (category) => featuredDevices.find((product) => product.category === category)?.image || featuredDevices[0].image;
 
-function HomeHero() {
+const promos = [
+  { title: 'Smarter Living', subtitle: 'Premium Smart Living', text: 'Make every room work for you', image: productImageFor('Control Panels'), href: '/categories/control-panels' },
+  { title: 'Achieve More', subtitle: 'Track & Automate', text: 'Simplify your daily routine', image: productImageFor('Sensors'), href: '/categories/sensors' },
+  { title: 'Top Deals for You', subtitle: 'Limited Offers', text: 'Handpicked savings on smart devices', image: productImageFor('Smart Glass Panel'), href: '/shop?sort=price-asc' },
+];
+
+const trustItems = [
+  { icon: 'hub', title: 'Worldwide Shipping', text: 'Fast delivery to US, UK & UAE' },
+  { icon: 'security', title: 'Secure Payments', text: '100% safe & secure checkout' },
+  { icon: 'switch', title: '30-Day Returns', text: 'Hassle-free returns' },
+  { icon: 'user', title: 'Premium Support', text: '24/7 customer support' },
+];
+
+const ideas = [
+  { title: 'Tech Setup Ideas', count: 17, icon: 'hub', href: '/categories/control-panels' },
+  { title: 'Smart Glass Essentials', count: 17, icon: 'plug', href: '/categories/smart-glass-panel' },
+  { title: 'Smart Living Inspiration', count: 73, icon: 'home', href: '/shop' },
+  { title: 'Security Gear', count: 4, icon: 'security', href: '/categories/video-doorbell' },
+  { title: 'Lighting Picks', count: 4, icon: 'light', href: '/categories/lighting' },
+];
+
+const trending = featuredDevices.slice(0, 6);
+
+function Hero() {
   return (
-    <section className="home-hero overflow-hidden rounded-2xl bg-slate-950 text-white">
-      <div className="home-hero-copy">
-        <p className="text-sm font-semibold uppercase tracking-widest text-blue-200">
-          Thoughtful technology, made simple
-        </p>
-        <h1 className="mt-3 text-4xl font-extrabold leading-tight sm:text-5xl">
-          A smarter home.<br/>Made simple.
-        </h1>
-        <p className="mt-4 text-lg text-slate-200">Find the right devices for every room.</p>
-        <a href="/shop" className="button-primary mt-6 min-h-12 px-6 font-semibold">
-          Shop smart home
-        </a>
-        <a href="#categories" className="mt-3 inline-flex min-h-11 items-center py-2 font-medium text-white">
-          Explore categories <span aria-hidden="true" className="ml-2">→</span>
-        </a>
+    <section className="hero-gradient overflow-hidden rounded-3xl text-white">
+      <div className="grid items-center gap-8 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-2 lg:px-14">
+        <div>
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-100 ring-1 ring-inset ring-white/20">
+            <span className="h-2 w-2 rounded-full bg-brand" /> New Arrival
+          </span>
+          <h1 className="mt-5 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            Discover. Shop.<br /><span className="text-brand">Upgrade.</span>
+          </h1>
+          <p className="mt-3 text-sm font-semibold uppercase tracking-widest text-blue-200">Latest Tech Gadgets</p>
+          <p className="mt-4 max-w-lg text-lg leading-8 text-slate-200">Explore cutting-edge gadgets that upgrade your lifestyle. Find the perfect device for a smarter home.</p>
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <a href="/shop" className="button-primary min-h-12 px-7 text-base">Explore products</a>
+            <a href="#categories" className="inline-flex min-h-12 items-center px-4 font-semibold text-white hover:text-blue-200">Browse categories <span aria-hidden="true" className="ml-2">→</span></a>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20">
+            <ProductImage src="/assets/campaign/smart-home-living-room.webp" alt="SmartAtlas devices in a modern living room" className="h-64 w-full sm:h-80 lg:h-96" imageClassName="h-full w-full object-cover" />
+          </div>
+          <div className="absolute -bottom-4 -left-4 hidden rounded-xl bg-white px-4 py-3 text-ink shadow-lg sm:block">
+            <p className="text-xs text-slate-500">Fast Shipping</p>
+            <p className="text-sm font-bold">Smart Devices</p>
+          </div>
+        </div>
       </div>
-      <ProductImage
-        src="/assets/campaign/smart-home-living-room.webp"
-        alt="Smart-home living room"
-        className="home-hero-image"
-        imageClassName="h-full w-full object-cover"
-      />
+    </section>
+  );
+}
+
+function PromoStrip() {
+  return (
+    <section className="mt-6 grid gap-4 md:grid-cols-3">
+      {promos.map((promo) => (
+        <a key={promo.title} href={promo.href} className="promo-card flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4">
+          <div className="grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-xl bg-blue-50">
+            <ProductImage src={promo.image} alt={promo.title} className="h-full w-full" imageClassName="h-full w-full object-contain p-2" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand">{promo.subtitle}</p>
+            <p className="mt-1 text-lg font-bold text-ink">{promo.title}</p>
+            <p className="mt-0.5 text-sm text-slate-600">{promo.text}</p>
+          </div>
+        </a>
+      ))}
     </section>
   );
 }
 
 function CategoryGrid() {
   return (
-    <section id="categories" className="mt-9 scroll-mt-6 md:mt-12">
-      <h2 className="text-2xl font-bold md:text-3xl">Build your smart home</h2>
-      <p className="mt-1 text-slate-600">Browse by device</p>
-      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
+    <section id="categories" className="mt-12 scroll-mt-24">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div><h2 className="text-2xl font-bold tracking-tight md:text-3xl">Shop by Category</h2><p className="mt-1 text-slate-600">Find the right device for every room</p></div>
+        <a href="/shop" className="font-semibold text-brand hover:underline">View all</a>
+      </div>
+      <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
         {categories.map((category) => (
-          <a
-            href={`/categories/${category.name.toLowerCase()}`}
-            key={category.name}
-            className="overflow-hidden rounded-xl border border-slate-200 bg-white text-center transition-shadow hover:shadow-md"
-          >
-            <ProductImage
-              src={category.image}
-              alt={category.imageAlt}
-              className="category-image"
-              imageClassName="h-full w-full object-contain p-3"
-            />
-            <span className="flex min-h-11 items-center justify-center border-t border-slate-100 px-2 font-semibold">
-              {category.name}
-            </span>
+          <a key={category.name} href={`/categories/${category.slug || category.name.toLowerCase()}`} className="promo-card overflow-hidden rounded-2xl border border-slate-200 bg-white text-center">
+            <ProductImage src={category.image} alt={category.imageAlt} className="category-image" imageClassName="h-full w-full object-contain p-4" />
+            <span className="flex min-h-12 items-center justify-center border-t border-slate-100 px-2 text-sm font-semibold text-ink">{category.name}</span>
           </a>
         ))}
       </div>
@@ -64,33 +100,68 @@ function CategoryGrid() {
   );
 }
 
-function FeaturedDevices() {
+function TrendingProducts() {
   return (
-    <section id="featured" className="mt-10 scroll-mt-6 md:mt-14">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <h2 className="text-2xl font-bold md:text-3xl">Featured devices</h2>
-        <a href="/shop" className="min-h-11 py-2 font-medium text-brand">View all products</a>
+    <section className="mt-12">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div><h2 className="text-2xl font-bold tracking-tight md:text-3xl">Trending Products</h2><p className="mt-1 text-slate-600">Popular picks from our smart-home catalog</p></div>
+        <a href="/shop" className="font-semibold text-brand hover:underline">View all</a>
       </div>
-      <div className="mx-auto mt-5 grid max-w-5xl grid-cols-1 justify-items-center gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-        {promotedProducts.map((device) => <ProductCard key={device.id} device={device}/>) }
+      <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
+        {trending.map((device) => <ProductCard key={device.id} device={device} compact />)}
       </div>
     </section>
   );
 }
 
-function CompatibilityPanel() {
+function TrustBar() {
   return (
-    <section className="mt-10 grid gap-5 rounded-2xl border border-blue-100 bg-blue-50 p-6 sm:p-8 md:mt-14 md:grid-cols-[1fr_auto] md:items-center">
-      <div>
-        <h2 className="text-2xl font-bold">Not sure what works together?</h2>
-        <p className="mt-2 text-slate-700">Check hub, protocol and wiring requirements before you buy.</p>
-        <ul className="mt-4 flex flex-wrap gap-2" aria-label="Protocols available in the product fixtures">
-          <li className="rounded-full border border-slate-300 bg-white px-4 py-2">Wi-Fi</li>
-          <li className="rounded-full border border-slate-300 bg-white px-4 py-2">Zigbee</li>
-          <li className="rounded-full border border-slate-300 bg-white px-4 py-2">Thread</li>
-        </ul>
+    <section className="mt-12 grid gap-4 rounded-2xl border border-slate-200 bg-white p-6 sm:grid-cols-2 lg:grid-cols-4">
+      {trustItems.map((item) => (
+        <div key={item.title} className="trust-item">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-light text-brand"><Icon name={item.icon} className="h-5 w-5" /></span>
+          <div><p className="text-sm font-semibold text-ink">{item.title}</p><p className="text-xs text-slate-500">{item.text}</p></div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+function IdeasSection() {
+  return (
+    <section className="mt-12">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div><h2 className="text-2xl font-bold tracking-tight md:text-3xl">Ideas for Your Next Upgrade</h2><p className="mt-1 text-slate-600">Get inspired for every corner of your home</p></div>
+        <a href="/shop" className="font-semibold text-brand hover:underline">See more</a>
       </div>
-      <a href="/shop" className="button-primary min-h-11 px-5 font-semibold">Browse devices</a>
+      <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+        {ideas.map((idea) => (
+          <a key={idea.title} href={idea.href} className="idea-card rounded-2xl border border-slate-200 bg-white p-5 text-center">
+            <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-brand-light text-brand"><Icon name={idea.icon} className="h-7 w-7" /></span>
+            <h3 className="mt-4 text-sm font-bold text-ink">{idea.title}</h3>
+            <p className="mt-1 text-xs text-slate-500">{idea.count} ideas</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Newsletter() {
+  return (
+    <section className="newsletter-gradient mt-12 overflow-hidden rounded-3xl px-6 py-10 text-white sm:px-10 sm:py-12">
+      <div className="grid items-center gap-8 lg:grid-cols-2">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-widest text-blue-200">Newsletter</p>
+          <h2 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">Exclusive Deals<br />for You!</h2>
+          <p className="mt-3 max-w-lg text-slate-200">Save more on top-rated smart gadgets handpicked just for you. Get our latest deals in your inbox.</p>
+        </div>
+        <form className="flex w-full flex-col gap-3 sm:flex-row" onSubmit={(event) => event.preventDefault()}>
+          <label className="sr-only" htmlFor="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" required placeholder="Enter your email address" className="min-h-12 flex-1 rounded-xl border-0 bg-white px-4 text-sm text-ink" />
+          <button type="submit" className="button-primary min-h-12 rounded-xl bg-brand px-7 font-semibold hover:bg-brand-hover">Subscribe</button>
+        </form>
+      </div>
     </section>
   );
 }
@@ -98,14 +169,17 @@ function CompatibilityPanel() {
 export default function HomePage() {
   return (
     <div id="home" className="min-h-screen">
-      <StoreHeader/>
-      <main className="market-shell pb-10 pt-4 sm:pt-6">
-        <HomeHero/>
-        <CategoryGrid/>
-        <FeaturedDevices/>
-        <CompatibilityPanel/>
+      <StoreHeader />
+      <main className="market-shell pb-4 pt-5 sm:pt-6">
+        <Hero />
+        <PromoStrip />
+        <CategoryGrid />
+        <TrendingProducts />
+        <TrustBar />
+        <IdeasSection />
+        <Newsletter />
       </main>
-      <StoreFooter/>
+      <StoreFooter />
     </div>
   );
 }
