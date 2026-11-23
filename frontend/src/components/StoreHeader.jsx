@@ -8,7 +8,7 @@ export default function StoreHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { totalUnits } = useCart();
   return <>
-    <div className="hidden border-b border-slate-200 bg-slate-100 text-sm md:block"><div className="mx-auto flex max-w-content justify-between px-6 py-2 text-slate-700"><span>Smart devices. Clear choices.</span><div className="flex gap-6"><a href="#help">Help &amp; support</a><a href="#sellers">Sell with us</a></div></div></div>
+    <div className="hidden border-b border-slate-200 bg-slate-100 text-sm md:block"><div className="mx-auto flex max-w-content justify-between px-6 py-2 text-slate-700"><span>Smart devices. Clear choices.</span><div className="flex gap-6"><a href="#help">Help &amp; support</a><a href="/seller">Demo seller portal</a></div></div></div>
     <header className="mx-auto max-w-content px-4 md:px-6 lg:px-8">
       <div className="flex min-h-16 items-center justify-between gap-3 border-b border-slate-200 py-2 md:min-h-[76px]">
         <button className="flex min-h-11 min-w-11 items-center justify-center md:hidden" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="category-nav" onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'}/></button>

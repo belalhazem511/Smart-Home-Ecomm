@@ -10,6 +10,8 @@ import OrderHistoryPage from '../pages/OrderHistoryPage.jsx';
 import OrderDetailPage from '../pages/OrderDetailPage.jsx';
 import AccountProfilePage from '../pages/AccountProfilePage.jsx';
 import AccountAddressesPage from '../pages/AccountAddressesPage.jsx';
+import SellerChooserPage from '../pages/SellerChooserPage.jsx';
+import SellerDashboardPage from '../pages/SellerDashboardPage.jsx';
 
 function currentPath() { return window.location.pathname; }
 
@@ -45,5 +47,12 @@ export default function App() {
   if (pathname === '/account/profile') return <AccountProfilePage/>;
   if (pathname === '/account/addresses') return <AccountAddressesPage/>;
   if (pathname.startsWith('/account/orders/')) return <OrderDetailPage orderId={decodeURIComponent(pathname.slice('/account/orders/'.length))}/>;
+  if (pathname === '/seller') return <SellerChooserPage/>;
+  const sellerRoute = pathname.match(/^\/seller\/([^/]+)$/);
+  if (sellerRoute) {
+    let merchantId = sellerRoute[1];
+    try { merchantId = decodeURIComponent(merchantId); } catch { /* Keep malformed IDs unavailable. */ }
+    return <SellerDashboardPage key={merchantId} merchantId={merchantId}/>;
+  }
   return <HomePage/>;
 }
