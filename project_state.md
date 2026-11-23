@@ -1,4 +1,11 @@
 ﻿# Project state
+## Current checkpoint — M01 shared foundations and core marketplace layouts
+- M01 only from `FRONTEND_UI_AND_WORKFLOW_MASTER_REWORK.md` is complete; prior redesign notes remain historical. Supplied desktop/mobile screenshots were reviewed as rejected before evidence only and were not used as page or product assets.
+- Replaced the conflicting CSS foundation, redesigned shared storefront header/Home/ProductCard/Cart and full-width seller/admin portal shells. Business logic and identities were preserved; Home promotes only products with implemented detail routes. Portal navigation no longer shows long deferred lists; demo limitations remain available through a compact disclosure.
+- Verification: existing tests PASS (41, run once); production build PASS (Vite 8.3.8, run once); `git diff --check` PASS. The dev server at `http://127.0.0.1:5173/` returned HTTP 200 for root and changed source modules. No browser or manual visual review was run.
+- Product/category photography and local font files remain absent (`ASSET_PENDING`); restrained SVG placeholders and system-font fallback remain. Browser/visual checks remain `NOT_VERIFIED`; open requirements are detailed in `FRONTEND_GAP_AUDIT.md`.
+- Commit title: `Rebuild shared visual foundations and core marketplace layouts`. Integration branch remains the delivery target for this bounded M01 handoff.
+
 ## Current checkpoint — M00 frontend gap audit
 - Active brief: `FRONTEND_UI_AND_WORKFLOW_MASTER_REWORK.md` replaces the earlier redesign stage. M00 only was authorized; no UI or application code was changed.
 - Created `FRONTEND_GAP_AUDIT.md`, mapping all 59 checklist IDs to source/routes and evidence, status, required frontend work, dependencies, priority and next action. Missing frontend states remain gaps even when live operation needs a backend.

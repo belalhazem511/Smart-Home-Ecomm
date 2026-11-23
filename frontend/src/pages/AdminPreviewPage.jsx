@@ -9,7 +9,7 @@ function formatDate(date, long = false) {
 }
 
 function ScreenHeading({ eyebrow = 'Admin preview', title, description, action }) {
-  return <div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{eyebrow}</p><h1 className="mt-1 text-2xl font-bold sm:text-3xl">{title}</h1>{description && <p className="mt-1 max-w-2xl text-sm leading-5 text-slate-600">{description}</p>}</div>{action}</div>;
+  return <div className="portal-page-header"><div><p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{eyebrow}</p><h1>{title}</h1>{description && <p className="mt-1 max-w-2xl text-sm leading-5 text-slate-600">{description}</p>}</div>{action}</div>;
 }
 
 function StatusLabel({ status }) {
@@ -18,7 +18,7 @@ function StatusLabel({ status }) {
 }
 
 function TableFrame({ label, columns, children }) {
-  return <div className="mt-4 overflow-x-auto rounded-lg border border-slate-200 bg-white" role="region" aria-label={label} tabIndex="0"><table className="w-full min-w-[680px] border-collapse text-left text-sm"><thead className="bg-slate-50 text-xs text-slate-600"><tr>{columns.map((column) => <th key={column} scope="col" className="px-4 py-3 font-semibold">{column}</th>)}</tr></thead><tbody className="divide-y divide-slate-100">{children}</tbody></table></div>;
+  return <div className="portal-table-wrap mt-4" role="region" aria-label={label} tabIndex="0"><table className="portal-table min-w-[680px]"><thead><tr>{columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr></thead><tbody>{children}</tbody></table></div>;
 }
 
 function EmptyTableRow({ columns, children }) {
@@ -38,7 +38,7 @@ function AdminDashboard() {
     ['Fictional users', counts.users, '/admin/users'],
     ['Orders to inspect', counts.orders, '/admin/orders'],
   ];
-  return <><ScreenHeading title="Overview" description="Queue counts are calculated from fictional preview records. No review or account changes are available."/><section aria-label="Admin preview counts" className="mt-5 grid grid-cols-2 gap-3 xl:grid-cols-5">{cards.map(([label, count, href]) => <a key={label} href={href} className="rounded-lg border border-slate-200 bg-white p-4 hover:border-slate-300"><p className="text-xs leading-5 text-slate-600">{label}</p><p className="mt-1 text-2xl font-bold">{count}</p><span className="mt-2 inline-flex text-xs font-semibold text-brand">Open list</span></a>)}</section>
+  return <><ScreenHeading title="Overview" description="Queue counts are derived from fictional preview records."/><section aria-label="Admin preview counts" className="mt-5 grid grid-cols-2 gap-3 xl:grid-cols-5">{cards.map(([label, count, href]) => <a key={label} href={href} className="min-h-24 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:border-slate-300"><p className="text-[13px] leading-5 text-slate-600">{label}</p><p className="mt-1 text-2xl font-bold tabular-nums">{count}</p><span className="mt-2 inline-flex text-xs font-semibold text-brand">Open list</span></a>)}</section>
     <section className="mt-5 rounded-lg border border-slate-200 bg-white p-4"><div className="flex flex-wrap items-end justify-between gap-2"><div><h2 className="font-semibold">Recent customer orders</h2><p className="mt-1 text-xs text-slate-600">Totals use purchase-time snapshots.</p></div><a href="/admin/orders" className="text-sm font-semibold text-brand">View all</a></div><TableFrame label="Recent demo customer orders" columns={['Order', 'Placed', 'Order status', 'Payment', 'Total']}>
       {demoOrders.slice(0, 4).map((order) => <tr key={order.id}><th scope="row" className="px-4 py-3"><a href={`/admin/orders/${encodeURIComponent(order.id)}`} className="font-semibold text-brand underline">{order.number}</a></th><td className="whitespace-nowrap px-4 py-3">{formatDate(order.placedAt)}</td><td className="px-4 py-3">{order.status.replace(' (demo)', '')}</td><td className="px-4 py-3">{order.paymentStatus.replace(' (demo)', '')}</td><td className="whitespace-nowrap px-4 py-3 font-semibold">{formatMinorUnits(getOrderSnapshotTotals(order).totalMinor)}</td></tr>)}
     </TableFrame></section></>;
