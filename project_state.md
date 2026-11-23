@@ -166,3 +166,11 @@ Review the proposed simple architecture with the user. On subsequent instruction
 - Verification: `npm.cmd test` PASS (39 tests including cart, checkout, auth and account logic); `npm.cmd run build` PASS (Vite 8.3.8). Browser and visual checks are `NOT_VERIFIED`; no browser automation was used.
 - Limitations: all user and commerce records remain fixtures; no authentication, order creation, payment, stock reservation, or persistent customer changes. Product imagery remains `ASSET_PENDING`.
 - Next phase: refine seller portal overview, offer list and draft editor using an operational workspace layout.
+
+## Visual redesign phase 3: seller workspace
+- Refined the seller area into a compact operational workspace with a consistent portal header, assigned-merchant selector, responsive sidebar, active Overview/Offers navigation, and clearly deferred destinations. The merchant chooser now opens seller pages directly without duplicating the customer storefront header.
+- Overview cards continue to derive from merchant-scoped seller-order fixtures. Recent orders now use a labeled horizontal table with separate order, payment, and processing statuses; no balances or write actions were added.
+- Offer lists now use a searchable table for product/variant, SKU, price, warranty, status and allowed action. Published fixture offers remain read-only. Draft editing retains its product/variant validation, merchant-local SKU uniqueness, integer minor-unit price validation and in-memory state.
+- Focused seller tests: `npm.cmd test` PASS (39 total; merchant lookup/membership, scoped overview, offer isolation, product/variant validity, SKU, pricing and draft-only checks). `npm.cmd run build` PASS (Vite 8.3.8). Browser and visual checks are `NOT_VERIFIED`.
+- Limitations: fictional client-side memberships and fixtures only; no authentication, approval, persistence, inventory or backend integration. Product imagery remains `ASSET_PENDING`.
+- Next phase: add the fictional, clearly labeled admin preview for overview, merchant review, users, product/offer review and order inspection.
