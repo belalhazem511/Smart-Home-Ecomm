@@ -1,4 +1,12 @@
 ﻿# Project state
+## Current checkpoint — M00 frontend gap audit
+- Active brief: `FRONTEND_UI_AND_WORKFLOW_MASTER_REWORK.md` replaces the earlier redesign stage. M00 only was authorized; no UI or application code was changed.
+- Created `FRONTEND_GAP_AUDIT.md`, mapping all 59 checklist IDs to source/routes and evidence, status, required frontend work, dependencies, priority and next action. Missing frontend states remain gaps even when live operation needs a backend.
+- Source HEAD at audit start: `a9b99443ccac7e7bbb8294ad831b3e190df70729`, branch `integration/storefront-20261123`. Actual route dispatch and demo state were inspected. Local Vite dev at `http://127.0.0.1:5173/` and production preview at `http://127.0.0.1:4173/` served the current source/build; this is not visual verification.
+- Major gaps include no wishlist/compare/seller storefront/public support, sparse product detail and missing product imagery, no payment outcome journeys or customer aftersales, absent seller onboarding/catalog proposals/inventory/order/shipping/finance/support, and a limited read-only admin subset. See the audit for each ID and concrete actions.
+- Product imagery remains `ASSET_PENDING`; browser/visual checks are `NOT_VERIFIED`. Previously documented phase-4 checks were 41 tests and a production build passing. Tests/build were not rerun for this documentation-only change.
+- M00 next: review `FRONTEND_GAP_AUDIT.md`, then begin bounded M01. Git handoff for this audit is pending.
+
 Updated: 2026-11-23
 Requested scope: Orientation only; no implementation, installation or image generation.
 Current milestone: D00 architecture proposed; awaiting review.
