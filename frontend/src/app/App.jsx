@@ -5,6 +5,9 @@ import ProductPage from '../pages/ProductPage.jsx';
 import CartPage from '../pages/CartPage.jsx';
 import CheckoutPage from '../pages/CheckoutPage.jsx';
 import AuthPage from '../pages/AuthPage.jsx';
+import AccountPage from '../pages/AccountPage.jsx';
+import OrderHistoryPage from '../pages/OrderHistoryPage.jsx';
+import OrderDetailPage from '../pages/OrderDetailPage.jsx';
 
 function currentPath() { return window.location.pathname; }
 
@@ -35,5 +38,8 @@ export default function App() {
   if (pathname === '/cart') return <CartPage/>;
   if (pathname === '/checkout') return <CheckoutPage/>;
   if (pathname === '/sign-in' || pathname === '/sign-up' || pathname === '/forgot-password') return <AuthPage key={pathname} pathname={pathname}/>;
+  if (pathname === '/account') return <AccountPage/>;
+  if (pathname === '/account/orders') return <OrderHistoryPage/>;
+  if (pathname.startsWith('/account/orders/')) return <OrderDetailPage orderId={decodeURIComponent(pathname.slice('/account/orders/'.length))}/>;
   return <HomePage/>;
 }

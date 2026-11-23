@@ -113,3 +113,10 @@ Review the proposed simple architecture with the user. On subsequent instruction
 - `npm.cmd test`: PASS, 19 tests including auth email, required fields, password length and confirmation cases. `npm.cmd run build`: PASS (Vite 8.3.8). No browser/visual verification performed; assets remain `ASSET_PENDING`.
 - Commit naming preference: descriptive English titles explaining the change. Use exactly `Add sign-in, sign-up, and password recovery screens` when these three screens are complete. Include changes, checks and limitations in the commit body; follow this preference for future commits.
 - Next workflow: commit this auth UI slice and push the existing integration branch.
+
+## Customer account overview and order history slice
+- Added `/account`, `/account/orders`, and `/account/orders/:orderId`, using a shared responsive account layout with simple Overview/Orders navigation and clearly deferred profile/address destinations.
+- Added fictional demo customer and standalone demo order fixtures. Order item names, variants, unit prices, line totals, seller delivery information and charges are purchase-time snapshots; helpers group by seller and total only those snapshots, without reading current catalog offers. Checkout creates none of these records.
+- Added an explicit `View demo account` link from auth screens. Account views identify the fictional demo and state that they provide no authentication/access control. Unknown order IDs and empty histories have clear states. Order actions remain deferred. No real customer records, tokens, or sessions are created.
+- `npm.cmd test`: PASS, 23 total; focused order checks cover lookup, empty/unknown IDs, seller grouping and snapshot totals. `npm.cmd run build`: PASS (Vite 8.3.8). No browser/visual verification performed. Asset gaps remain `ASSET_PENDING`.
+- Commit naming preference remains: clear descriptive English titles, include changes/checks/limitations in commit body. This slice uses requested title `Add demo account overview, order history, and order details`.
