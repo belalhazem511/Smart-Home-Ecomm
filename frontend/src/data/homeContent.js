@@ -1,21 +1,21 @@
 export const categories = [
-  { name: 'Switches', icon: 'switch', note: 'Smart controls' },
-  { name: 'Lighting', icon: 'light', note: 'Light your way' },
-  { name: 'Sensors', icon: 'sensor', note: 'Know what changes' },
-  { name: 'Security', icon: 'security', note: 'Feel at home' },
-  { name: 'Curtains', icon: 'curtains', note: 'Set the scene' },
-  { name: 'Hubs', icon: 'hub', note: 'Bring devices together' },
+  { name: 'Switches', image: '/assets/products/touch-switch-front.webp', imageAlt: 'Smart touch switch' },
+  { name: 'Lighting', image: '/assets/products/smart-bulb-front.webp', imageAlt: 'Smart light bulb' },
+  { name: 'Sensors', image: '/assets/products/motion-sensor-front.webp', imageAlt: 'Motion sensor' },
+  { name: 'Security', image: '/assets/products/door-contact-sensor-front.webp', imageAlt: 'Door contact sensor' },
+  { name: 'Curtains', image: '/assets/products/curtain-motor-front.webp', imageAlt: 'Curtain motor' },
+  { name: 'Hubs', image: '/assets/products/home-hub-front.webp', imageAlt: 'Smart home hub' },
 ];
 
 export const featuredDevices = [
-  { id: 'touch-switch', name: 'Zigbee Touch Switch', category: 'Switches', detail: '3 gang · Neutral required', connectivity: 'Zigbee', requiresHub: true, price: 1490, symbol: 'switch' },
-  { id: 'wifi-plug', name: 'Smart Wi-Fi Plug', category: 'Switches', detail: 'Wi-Fi · No hub required', connectivity: 'Wi-Fi', requiresHub: false, price: 649, symbol: 'plug' },
-  { id: 'motion-sensor', name: 'Motion Sensor', category: 'Sensors', detail: 'Zigbee · Hub required', connectivity: 'Zigbee', requiresHub: true, price: 890, symbol: 'sensor' },
-  { id: 'home-hub', name: 'Smart Home Hub', category: 'Hubs', detail: 'Multi-protocol hub', connectivity: 'Multi-protocol', requiresHub: false, price: 2490, symbol: 'hub' },
-  { id: 'smart-bulb', name: 'Tunable Smart Bulb', category: 'Lighting', detail: 'Wi-Fi · No hub required', connectivity: 'Wi-Fi', requiresHub: false, price: 520, symbol: 'light' },
-  { id: 'door-sensor', name: 'Door Contact Sensor', category: 'Security', detail: 'Zigbee · Hub required', connectivity: 'Zigbee', requiresHub: true, price: 730, symbol: 'security' },
-  { id: 'curtain-motor', name: 'Smart Curtain Motor', category: 'Curtains', detail: 'Wi-Fi · No hub required', connectivity: 'Wi-Fi', requiresHub: false, price: 3290, symbol: 'curtains' },
-  { id: 'thread-sensor', name: 'Presence Sensor', category: 'Sensors', detail: 'Thread · Hub required', connectivity: 'Thread', requiresHub: true, price: 1790, symbol: 'sensor' },
+  { id: 'touch-switch', name: 'Zigbee Touch Switch', category: 'Switches', detail: '3 gang · Neutral required', connectivity: 'Zigbee', requiresHub: true, price: 1490, image: '/assets/products/touch-switch-front.webp', imageAlt: 'Black three-gang Zigbee touch switch' },
+  { id: 'wifi-plug', name: 'Smart Wi-Fi Plug', category: 'Switches', detail: 'Wi-Fi · No hub required', connectivity: 'Wi-Fi', requiresHub: false, price: 649, image: '/assets/products/wifi-plug-eu-front.webp', imageAlt: 'Smart Wi-Fi plug, EU variant' },
+  { id: 'motion-sensor', name: 'Motion Sensor', category: 'Sensors', detail: 'Zigbee · Hub required', connectivity: 'Zigbee', requiresHub: true, price: 890, image: '/assets/products/motion-sensor-front.webp', imageAlt: 'Zigbee motion sensor' },
+  { id: 'home-hub', name: 'Smart Home Hub', category: 'Hubs', detail: 'Multi-protocol hub', connectivity: 'Multi-protocol', requiresHub: false, price: 2490, image: '/assets/products/home-hub-front.webp', imageAlt: 'Multi-protocol smart home hub' },
+  { id: 'smart-bulb', name: 'Tunable Smart Bulb', category: 'Lighting', detail: 'Wi-Fi · No hub required', connectivity: 'Wi-Fi', requiresHub: false, price: 520, image: '/assets/products/smart-bulb-front.webp', imageAlt: 'Tunable smart bulb' },
+  { id: 'door-sensor', name: 'Door Contact Sensor', category: 'Security', detail: 'Zigbee · Hub required', connectivity: 'Zigbee', requiresHub: true, price: 730, image: '/assets/products/door-contact-sensor-front.webp', imageAlt: 'Zigbee door contact sensor' },
+  { id: 'curtain-motor', name: 'Smart Curtain Motor', category: 'Curtains', detail: 'Wi-Fi · No hub required', connectivity: 'Wi-Fi', requiresHub: false, price: 3290, image: '/assets/products/curtain-motor-front.webp', imageAlt: 'Smart curtain motor' },
+  { id: 'thread-sensor', name: 'Presence Sensor', category: 'Sensors', detail: 'Thread · Hub required', connectivity: 'Thread', requiresHub: true, price: 1790, image: '/assets/products/presence-sensor-front.webp', imageAlt: 'Thread presence sensor' },
 ];
 
 export const productDetails = [

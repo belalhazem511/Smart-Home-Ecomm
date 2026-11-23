@@ -16,7 +16,7 @@
 
 This document replaces the earlier small visual-correction brief. It is the comprehensive frontend requirements and gap-audit brief. It does not authorize inventing completed payment processing, authentication, legal compliance, shipment execution, or money transfers.
 
-The owner explicitly requested text-only work. Do not browse competitor websites, use browser automation, generate images, install design libraries, or upgrade dependencies. The supplied screenshots and project documents are the visual evidence. The comparisons below describe established marketplace patterns; they are not a fresh audit of Amazon or Noon, and they do not assert that every competitor uses every feature or policy.
+Use the supplied local screenshots and project documents as visual evidence. Do not browse competitor websites, use browser automation, or generate images. The comparisons below describe established marketplace patterns; they are not a fresh audit of Amazon or Noon, and they do not assert that every competitor uses every feature or policy.
 
 Read project_state.md, the current routes, components, fixture models, existing tests, and the relevant sections of the existing architecture/page map. Do not repeatedly reload the entire document pack. Do not replace existing decisions silently.
 
@@ -168,7 +168,7 @@ These are proposed implementation targets, not measurements inferred from the sc
 | Spacing | A small consistent scale: 4, 8, 12, 16, 24, 32, 48px. Avoid arbitrary large padding everywhere. |
 | Store content | Existing 1320px maximum with 16/24/32px responsive gutters. |
 | Header | Approximately 24px utility row, 64px main row, 40px category bar on desktop. Search is the main control. |
-| Hero | Approximately 280–320px desktop. Without photography, use a compact promotion strip rather than a large empty image panel. |
+| Hero | Use an image-led composition approximately 340–400px high on desktop, with about 40% for copy and 60% for a substantial campaign image. On small screens, stack the copy and image into a useful mobile composition. If approved photography is absent, retain the authored image layout with a restrained fallback and record the exact asset as `ASSET_PENDING`; do not claim photographic completion or replace the composition with a text-only strip. |
 | Category entry | Compact image-led tiles; no oversized empty squares and repeated generic taglines. |
 | Product grid | Four or five columns when space supports it; three/two/one according to usable card width. Do not force unreadable mobile cards. |
 | Product media | Approximately 170–190px desktop card media area; consistent object-fit contain and background treatment. |
