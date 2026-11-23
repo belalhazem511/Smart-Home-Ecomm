@@ -36,6 +36,7 @@ function ProductGallery({ productName, variant }) {
           <div className="h-full w-full" role="img" aria-label={`${productName} image unavailable`}/>
         )}
       </div>
+      {variant?.imageNote && <p className="mt-2 text-xs text-slate-500">{variant.imageNote}</p>}
       {images.length > 1 && (
         <div className="mt-3 flex flex-wrap gap-3" aria-label="Product image thumbnails">
           {images.map((image) => (
@@ -223,6 +224,7 @@ function ProductDetailsSections({ product, variant, selectedOffer }) {
         <section>
           <h3 className="text-lg font-semibold">Description</h3>
           <p className="mt-2 max-w-prose leading-7 text-slate-700">{product.description}</p>
+          {product.features?.length > 0 && <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-700">{product.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>}
         </section>
         <section>
           <h3 className="text-lg font-semibold">Specifications</h3>

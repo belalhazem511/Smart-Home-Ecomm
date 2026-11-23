@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useState } from 'react';
-import { demoSellerOffers } from '../data/demoSeller.js';
+import { demoSellerDraftOffers, demoSellerOffers } from '../data/marketplaceDemo.js';
 import { productDetails } from '../data/homeContent.js';
 import { createOfferDraft, updateOfferDraft } from '../lib/sellerOffers.js';
 
@@ -10,7 +10,7 @@ function createDraftId() {
 }
 
 export function SellerOffersProvider({ children }) {
-  const [draftOffers, setDraftOffers] = useState([]);
+  const [draftOffers, setDraftOffers] = useState(() => demoSellerDraftOffers.map((offer) => ({ ...offer })));
   const value = useMemo(() => ({
     draftOffers,
     addDraft: (draft, merchantId) => {

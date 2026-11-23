@@ -6,7 +6,7 @@ import { categories, featuredDevices, productDetails } from '../data/homeContent
 
 const promotedProducts = featuredDevices.filter((device) =>
   productDetails.some((detail) => detail.productId === device.id),
-);
+).slice(0, 3);
 
 function HomeHero() {
   return (

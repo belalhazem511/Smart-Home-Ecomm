@@ -6,9 +6,16 @@ export function filterAndSortDevices(devices, filters) {
       && (!filters.category || device.category.toLowerCase() === filters.category.toLowerCase())
       && (!filters.connectivity || device.connectivity === filters.connectivity)
       && (filters.hub === '' || device.requiresHub === (filters.hub === 'required'))
-      && (!filters.minPrice || device.price >= Number(filters.minPrice))
-      && (!filters.maxPrice || device.price <= Number(filters.maxPrice));
-  }).sort((a, b) => filters.sort === 'price-asc' ? a.price - b.price : filters.sort === 'price-desc' ? b.price - a.price : a.name.localeCompare(b.name));
+      && (!filters.minPrice || (Number.isFinite(device.price) && device.price >= Number(filters.minPrice)))
+      && (!filters.maxPrice || (Number.isFinite(device.price) && device.price <= Number(filters.maxPrice)));
+  }).sort((a, b) => {
+    if (filters.sort === 'price-asc' || filters.sort === 'price-desc') {
+      if (!Number.isFinite(a.price)) return 1;
+      if (!Number.isFinite(b.price)) return -1;
+      return filters.sort === 'price-asc' ? a.price - b.price : b.price - a.price;
+    }
+    return a.name.localeCompare(b.name);
+  });
 }
 
 export function readCatalogFilters(search, category = '') {

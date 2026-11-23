@@ -53,7 +53,7 @@ function SignInForm() {
       <div className="-mt-1 text-right"><a href="/forgot-password" className="text-sm font-medium text-brand">Forgot password?</a></div>
       <button type="submit" className="min-h-12 w-full rounded-lg bg-brand px-5 font-semibold text-white hover:bg-blue-800">Sign in</button>
       {message && <p role="status" className="rounded-lg bg-blue-50 p-3 text-sm text-slate-700">{message}</p>}
-      {demoPreviewEnabled && <nav aria-label="Demo preview destinations" className="grid gap-2 border-t border-slate-200 pt-3 text-sm"><a href="/account" className="font-medium text-brand">Customer account preview</a><a href="/seller/merchant-nile" className="font-medium text-brand">Nile Smart Store seller preview</a><a href="/seller/merchant-cairo" className="font-medium text-brand">Cairo Connected seller preview</a></nav>}
+      {demoPreviewEnabled && <nav aria-label="Demo preview destinations" className="grid gap-2 border-t border-slate-200 pt-3 text-sm"><a href="/account" className="font-medium text-brand">Customer account preview</a>{[['merchant-nile', 'Nile Smart Store'], ['merchant-cairo', 'Cairo Connected'], ['merchant-delta', 'Delta Home Tech'], ['merchant-living', 'Connected Living']].map(([merchantId, name]) => <a key={merchantId} href={`/seller/${merchantId}`} className="font-medium text-brand">{name} seller preview</a>)}<a href="/admin" className="font-medium text-brand">Admin preview</a><p className="text-xs text-slate-600">Preview links do not authenticate users or secure these routes.</p></nav>}
     </form>
   </AuthLayout>;
 }

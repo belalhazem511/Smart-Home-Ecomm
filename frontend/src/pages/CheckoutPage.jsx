@@ -1,10 +1,12 @@
 ﻿import { useEffect, useState } from 'react';
 import StoreHeader from '../components/StoreHeader.jsx';
 import StoreFooter from '../components/StoreFooter.jsx';
+import ProductImage from '../components/ProductImage.jsx';
 import { useCart } from '../contexts/CartContext.jsx';
 import { deliveryOptionsBySeller, featuredDevices, formatMinorUnits, productDetails } from '../data/homeContent.js';
 import { getCartSummary } from '../lib/cart.js';
 import { calculateCheckoutTotals, calculateDeliveryMinor, hasValidCheckoutItems, highestAllowedStep, resolveCheckoutStep, validateAddress } from '../lib/checkout.js';
+import { useAccount } from '../contexts/AccountContext.jsx';
 
 const emptyAddress = { fullName: '', phone: '', city: '', street: '', apartment: '' };
 const steps = [
@@ -36,11 +38,11 @@ function PaymentStep({ paymentMethod, setPaymentMethod }) {
 }
 
 function ReviewStep({ address, sellerGroups, deliveries, paymentMethod }) {
-  return <div><h2 className="text-lg font-semibold">Review your selections</h2><section className="mt-4 rounded-md border border-slate-200 p-4"><h3 className="text-sm font-semibold">Delivery address</h3><p className="mt-2 text-sm leading-5 text-slate-700">{address.fullName}<br/>{address.phone}<br/>{address.street}{address.apartment ? `, ${address.apartment}` : ''}<br/>{address.city}</p></section><section className="mt-3"><h3 className="text-sm font-semibold">Items and delivery</h3><div className="mt-2 space-y-2">{sellerGroups.map((group) => { const option = (deliveryOptionsBySeller[group.seller] || []).find((item) => item.id === deliveries[group.seller]); return <article key={group.seller} className="rounded-md border border-slate-200 bg-white p-4"><h4 className="text-sm font-semibold">{group.seller}</h4><ul className="mt-2 space-y-1 text-sm text-slate-700">{group.items.map((item) => <li key={`${item.offer.id}-${item.variantId}`}>{item.quantity} x {item.productName} ({item.variantName})</li>)}</ul><p className="mt-3 border-t border-slate-100 pt-2 text-xs text-slate-600">{option?.label} | {formatMinorUnits(option?.chargeMinor || 0)}</p></article>; })}</div></section><section className="mt-4"><h3 className="text-sm font-semibold">Payment method</h3><p className="mt-1 text-sm">{paymentMethod === 'cod' ? 'Cash on delivery (demo selection)' : 'Card payment (selection only)'}</p></section></div>;
+  return <div><h2 className="text-lg font-semibold">Review your selections</h2><section className="mt-4 rounded-md border border-slate-200 p-4"><h3 className="text-sm font-semibold">Delivery address</h3><p className="mt-2 text-sm leading-5 text-slate-700">{address.fullName}<br/>{address.phone}<br/>{address.street}{address.apartment ? `, ${address.apartment}` : ''}<br/>{address.city}</p></section><section className="mt-3"><h3 className="text-sm font-semibold">Items and delivery</h3><div className="mt-2 space-y-2">{sellerGroups.map((group) => { const option = (deliveryOptionsBySeller[group.seller] || []).find((item) => item.id === deliveries[group.seller]); return <article key={group.seller} className="rounded-md border border-slate-200 bg-white p-4"><h4 className="text-sm font-semibold">{group.seller}</h4><ul className="mt-2 divide-y divide-slate-100 text-sm text-slate-700">{group.items.map((item) => { const product = featuredDevices.find((entry) => entry.id === item.productId); return <li key={`${item.offer.id}-${item.variantId}`} className="flex items-center gap-3 py-2"><ProductImage src={product?.image} alt="" className="h-12 w-12 rounded border border-slate-200" imageClassName="h-full w-full object-contain p-1"/><span>{item.quantity} x {item.productName} ({item.variantName})</span></li>; })}</ul><p className="mt-3 border-t border-slate-100 pt-2 text-xs text-slate-600">{option?.label} | {formatMinorUnits(option?.chargeMinor || 0)}</p></article>; })}</div></section><section className="mt-4"><h3 className="text-sm font-semibold">Payment method</h3><p className="mt-1 text-sm">{paymentMethod === 'cod' ? 'Cash on delivery (demo selection)' : 'Card payment (selection only)'}</p></section></div>;
 }
 
 function OrderSummary({ sellerGroups, deliveries, totals }) {
-  return <aside className="h-fit rounded-lg border border-slate-200 bg-white p-4 sm:p-5 xl:sticky xl:top-40"><h2 className="text-base font-semibold">Order summary</h2><div className="mt-3 space-y-3">{sellerGroups.map((group) => { const option = (deliveryOptionsBySeller[group.seller] || []).find((item) => item.id === deliveries[group.seller]); return <div key={group.seller} className="border-b border-slate-100 pb-3"><div className="flex justify-between gap-3 text-sm"><span>{group.seller}</span><span className="font-medium">{formatMinorUnits(group.subtotalMinor)}</span></div><p className="mt-1 text-xs text-slate-500">Delivery: {option ? formatMinorUnits(option.chargeMinor) : 'Choose at next step'}</p></div>; })}</div><div className="mt-3 flex justify-between text-sm"><span>Items</span><span>{formatMinorUnits(totals.itemsSubtotalMinor)}</span></div><div className="mt-2 flex justify-between text-sm"><span>Delivery estimate</span><span>{formatMinorUnits(totals.deliveryMinor)}</span></div><div className="mt-4 flex justify-between gap-3 border-t border-slate-200 pt-3 font-bold"><span>Estimated total</span><span>{formatMinorUnits(totals.estimatedTotalMinor)}</span></div><p className="mt-3 text-xs leading-5 text-slate-500">Fixture estimates only. No order, payment or stock reservation is created.</p></aside>;
+  return <aside className="h-fit rounded-lg border border-slate-200 bg-white p-4 sm:p-5 xl:sticky xl:top-40"><h2 className="text-base font-semibold">Order summary</h2><div className="mt-3 space-y-3">{sellerGroups.map((group) => { const option = (deliveryOptionsBySeller[group.seller] || []).find((item) => item.id === deliveries[group.seller]); return <div key={group.seller} className="border-b border-slate-100 pb-3"><div className="flex justify-between gap-3 text-sm"><span>{group.seller}</span><span className="font-medium">{formatMinorUnits(group.subtotalMinor)}</span></div><ul className="mt-2 space-y-2">{group.items.map((item) => { const product = featuredDevices.find((entry) => entry.id === item.productId); return <li key={`${item.offer.id}-${item.variantId}`} className="flex items-center gap-2 text-xs"><ProductImage src={product?.image} alt="" className="h-9 w-9 rounded border border-slate-200" imageClassName="h-full w-full object-contain p-0.5"/><span className="min-w-0 flex-1">{item.productName} · {item.variantName} × {item.quantity}</span></li>; })}</ul><p className="mt-2 text-xs text-slate-500">Delivery: {option ? formatMinorUnits(option.chargeMinor) : 'Choose at next step'}</p></div>; })}</div><div className="mt-3 flex justify-between text-sm"><span>Items</span><span>{formatMinorUnits(totals.itemsSubtotalMinor)}</span></div><div className="mt-2 flex justify-between text-sm"><span>Delivery estimate</span><span>{formatMinorUnits(totals.deliveryMinor)}</span></div><div className="mt-4 flex justify-between gap-3 border-t border-slate-200 pt-3 font-bold"><span>Estimated total</span><span>{formatMinorUnits(totals.estimatedTotalMinor)}</span></div><p className="mt-3 text-xs leading-5 text-slate-500">Fixture estimates only. No order, payment or stock reservation is created.</p></aside>;
 }
 
 function CheckoutUnavailable({ hasEntries }) {
@@ -49,9 +51,13 @@ function CheckoutUnavailable({ hasEntries }) {
 
 export default function CheckoutPage() {
   const { entries } = useCart();
+  const { addresses } = useAccount();
   const { sellerGroups, itemsSubtotalMinor } = getCartSummary(entries, productDetails, featuredDevices);
   const sellerNames = sellerGroups.map((group) => group.seller);
-  const [address, setAddress] = useState(emptyAddress);
+  const [address, setAddress] = useState(() => {
+    const saved = addresses.find((item) => item.isDefault) || addresses[0];
+    return saved ? { fullName: saved.fullName, phone: saved.phone, city: saved.city, street: saved.street, apartment: saved.apartment || saved.building || '' } : emptyAddress;
+  });
   const [deliveries, setDeliveries] = useState({});
   const [paymentMethod, setPaymentMethod] = useState('');
   const [step, setStep] = useState('address');

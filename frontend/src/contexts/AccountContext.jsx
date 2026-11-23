@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useState } from 'react';
-import { demoCustomer } from '../data/demoOrders.js';
+import { demoCustomer, demoCustomerAddresses } from '../data/marketplaceDemo.js';
 import { addAddress, chooseDefaultAddress, removeAddress, updateAddress } from '../lib/accountState.js';
 
 const AccountContext = createContext(null);
@@ -10,7 +10,7 @@ function createAddressId() {
 
 export function AccountProvider({ children }) {
   const [profile, setProfile] = useState(() => ({ ...demoCustomer }));
-  const [addresses, setAddresses] = useState([]);
+  const [addresses, setAddresses] = useState(() => demoCustomerAddresses.map((address) => ({ ...address })));
   const value = useMemo(() => ({
     profile,
     addresses,

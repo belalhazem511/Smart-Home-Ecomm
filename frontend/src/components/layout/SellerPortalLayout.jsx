@@ -24,7 +24,7 @@ export default function SellerPortalLayout({ merchantId, merchant, merchants, ac
     </div></header>
     <div className="portal-workspace">
       <div className="md:hidden"><button type="button" aria-expanded={mobileNavigationOpen} aria-controls="seller-sidebar" onClick={() => setMobileNavigationOpen((open) => !open)} className="button-secondary w-full justify-start"><Icon name="menu"/>Workspace navigation</button></div>
-      <aside id="seller-sidebar" className={`portal-sidebar ${mobileNavigationOpen ? 'block' : 'hidden'} md:block`}><div className="px-3 py-2"><p className="text-xs font-medium text-slate-500">Current merchant</p><p className="mt-0.5 truncate text-sm font-semibold">{merchant.name}</p></div><div className="mt-2 border-t border-slate-100 pt-2"><PortalNavigation merchantId={merchantId} active={active}/></div></aside>
+      <aside id="seller-sidebar" className={`portal-sidebar ${mobileNavigationOpen ? 'block' : 'hidden'} md:block`}><div className="flex items-center gap-3 px-3 py-2"><img src={merchant.logo} alt="" className="h-10 w-10 rounded-md border border-slate-200 bg-white p-1"/><div className="min-w-0"><p className="text-xs font-medium text-slate-500">Current merchant</p><p className="mt-0.5 truncate text-sm font-semibold">{merchant.name}</p></div></div><div className="mt-2 border-t border-slate-100 pt-2"><PortalNavigation merchantId={merchantId} active={active}/></div></aside>
       <main className="portal-content" aria-label={`${merchant.name} seller ${active === 'offers' ? 'offers' : 'overview'}`}>{children}</main>
     </div>
   </div>;

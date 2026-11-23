@@ -35,7 +35,7 @@ export default function ProductCard({ device }) {
               <p className="text-lg font-bold leading-6">{formatPrice(offer.price)}</p>
               <p className="mt-0.5 line-clamp-1 text-xs text-slate-600">Sold by {offer.seller}</p>
             </>
-          ) : <p className="text-lg font-bold leading-6">{formatPrice(device.price)}</p>}
+          ) : <p className="text-sm font-semibold leading-6 text-slate-600">No available offers</p>}
         </div>
         {detail ? (
           <a href={`/products/${detail.slug}`} className="button-primary mt-3 w-full">Choose options</a>

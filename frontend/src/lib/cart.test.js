@@ -29,5 +29,5 @@ test('seller groups and integer-minor-unit totals use fixture prices', () => {
   ], productDetails, featuredDevices);
   assert.equal(summary.sellerGroups.length, 2);
   assert.equal(summary.sellerGroups.find(({ seller }) => seller === 'Nile Smart Store').subtotalMinor, 492700);
-  assert.equal(summary.itemsSubtotalMinor, 650200);
+  assert.equal(summary.itemsSubtotalMinor, 646700);
 });

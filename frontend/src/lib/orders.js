@@ -12,15 +12,28 @@ export function groupSnapshotItemsBySeller(order) {
   }
   for (const delivery of order?.sellerDeliveries || []) {
     const group = groups.get(delivery.sellerId);
-    if (group) group.delivery = delivery;
+    if (group) {
+      group.delivery = delivery;
+      group.discountMinor = delivery.discountMinorSnapshot || 0;
+    }
   }
   return [...groups.values()];
 }
 
 export function getOrderSnapshotTotals(order) {
-  const itemsSubtotalMinor = (order?.items || []).reduce((total, item) => total + item.lineTotalMinorSnapshot, 0);
-  const deliverySubtotalMinor = (order?.sellerDeliveries || []).reduce((total, delivery) => total + delivery.chargeMinorSnapshot, 0);
-  return { itemsSubtotalMinor, deliverySubtotalMinor, totalMinor: itemsSubtotalMinor + deliverySubtotalMinor };
+  const itemsSubtotalMinor = Number.isInteger(order?.itemsSubtotalMinorSnapshot)
+    ? order.itemsSubtotalMinorSnapshot
+    : (order?.items || []).reduce((total, item) => total + item.lineTotalMinorSnapshot, 0);
+  const deliverySubtotalMinor = Number.isInteger(order?.deliveryMinorSnapshot)
+    ? order.deliveryMinorSnapshot
+    : (order?.sellerDeliveries || []).reduce((total, delivery) => total + delivery.chargeMinorSnapshot, 0);
+  const discountMinor = Number.isInteger(order?.discountMinorSnapshot)
+    ? order.discountMinorSnapshot
+    : (order?.sellerDeliveries || []).reduce((total, delivery) => total + (delivery.discountMinorSnapshot || 0), 0);
+  const totalMinor = Number.isInteger(order?.totalMinorSnapshot)
+    ? order.totalMinorSnapshot
+    : itemsSubtotalMinor + deliverySubtotalMinor - discountMinor;
+  return { itemsSubtotalMinor, discountMinor, deliverySubtotalMinor, totalMinor };
 }
 
 export function getOrderCounts(orders) {

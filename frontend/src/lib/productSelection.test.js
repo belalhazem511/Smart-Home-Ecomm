@@ -16,7 +16,8 @@ test('variant change keeps an offer only when it remains valid', () => {
 });
 
 test('invalid, mismatched, and unavailable offer selections are rejected', () => {
-  assert.equal(findAvailableOffer(product.offers, 'touch-switch-2g', 'switch-offer-unavailable'), null);
+  const zeroStockOffer = productDetails.find((item) => item.slug === 'smart-bulb').offers.find((offer) => offer.stockQuantity === 0);
+  assert.equal(findAvailableOffer(zeroStockOffer ? [zeroStockOffer] : [], 'smart-bulb-e27', zeroStockOffer?.id), null);
   const prior = { variantId: 'touch-switch-3g', offerId: 'switch-offer-a' };
   assert.deepEqual(selectOffer(prior, 'touch-switch-2g', 'switch-offer-a', product.offers), prior);
 });

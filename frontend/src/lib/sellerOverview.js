@@ -15,14 +15,14 @@ export function getMerchantMemberships(merchants, memberships) {
 export function getSellerOverview(merchantId, merchants, memberships, sellerOrders) {
   const access = findDemoMerchant(merchantId, merchants, memberships);
   if (!access) return null;
-  const orders = sellerOrders.filter((order) => order.merchantId === access.merchant.id);
+  const orders = sellerOrders.filter((order) => order.merchantId === access.merchant.id).sort((left, right) => right.createdAt.localeCompare(left.createdAt));
   return {
     ...access,
     orders,
     counts: {
       total: orders.length,
       pendingPayment: orders.filter((order) => order.paymentStatus.startsWith('Pending payment')).length,
-      readyForProcessing: orders.filter((order) => order.processingStatus === 'Ready for processing' && order.paymentStatus.startsWith('Paid')).length,
+      readyForProcessing: orders.filter((order) => order.processingStatus === 'Ready for processing' && !order.paymentStatus.startsWith('Pending') && !order.paymentStatus.startsWith('Payment failed') && !order.paymentStatus.startsWith('Not collected')).length,
       inFulfillment: orders.filter((order) => order.processingStatus === 'Handed to carrier').length,
     },
   };

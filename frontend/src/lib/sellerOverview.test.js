@@ -10,15 +10,17 @@ test('merchant lookup returns only an explicitly assigned merchant', () => {
 });
 
 test('merchant selector contains only explicit demo memberships', () => {
-  assert.deepEqual(getMerchantMemberships(demoMerchants, demoSellerMemberships).map(({ id }) => id), ['merchant-nile', 'merchant-cairo']);
+  assert.deepEqual(getMerchantMemberships(demoMerchants, demoSellerMemberships).map(({ id }) => id), ['merchant-nile', 'merchant-cairo', 'merchant-delta', 'merchant-living']);
   assert.deepEqual(getMerchantMemberships(demoMerchants, [demoSellerMemberships[1]]).map(({ id }) => id), ['merchant-cairo']);
 });
 
 test('overview counts and orders are scoped to the selected merchant', () => {
   const nile = getSellerOverview('merchant-nile', demoMerchants, demoSellerMemberships, demoSellerOrders);
   const cairo = getSellerOverview('merchant-cairo', demoMerchants, demoSellerMemberships, demoSellerOrders);
-  assert.deepEqual(nile.counts, { total: 3, pendingPayment: 1, readyForProcessing: 1, inFulfillment: 1 });
-  assert.deepEqual(cairo.counts, { total: 2, pendingPayment: 1, readyForProcessing: 1, inFulfillment: 0 });
+  assert.deepEqual(nile.counts, { total: 12, pendingPayment: 1, readyForProcessing: 2, inFulfillment: 2 });
+  assert.deepEqual(cairo.counts, { total: 14, pendingPayment: 1, readyForProcessing: 3, inFulfillment: 2 });
+  assert.equal(getSellerOverview('merchant-delta', demoMerchants, demoSellerMemberships, demoSellerOrders).counts.total, 15);
+  assert.equal(getSellerOverview('merchant-living', demoMerchants, demoSellerMemberships, demoSellerOrders).counts.total, 13);
   assert.ok(nile.orders.every((order) => order.merchantId === 'merchant-nile'));
   assert.ok(cairo.orders.every((order) => order.merchantId === 'merchant-cairo'));
 });
