@@ -1,0 +1,83 @@
+name: smarthomeecomm
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: smarthomeecomm-api:local
+    container_name: smarthomeecomm-api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      ASPNETCORE_URLS: http://+:8080
+      DOTNET_RUNNING_IN_CONTAINER: "true"
+      DB_CONNECTION_WRITE: Server=sqlserver,1433;Database=SmartHomeEcommDb;User Id=sa;Password=${MSSQL_SA_PASSWORD:-LocalDev!Pass123};Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True;
+      DB_CONNECTION_READ: Server=sqlserver,1433;Database=SmartHomeEcommDb;User Id=sa;Password=${MSSQL_SA_PASSWORD:-LocalDev!Pass123};Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True;
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-local-dev-only-key-change-me-0123456789abcdef}
+      JWT_ISSUER: ${JWT_ISSUER:-SmartHomeEcomm}
+      JWT_AUDIENCE: ${JWT_AUDIENCE:-SmartHomeEcomm}
+      JWT_DURATION_DAYS: ${JWT_DURATION_DAYS:-7}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      EMAIL_FROM: ${EMAIL_FROM:-noreply@smarthomeecomm.local}
+      PAYMOB_BASE_URL: ${PAYMOB_BASE_URL:-https://stg-bills.paymobsolutions.com}
+      PAYMOB_PUBLIC_KEY: ${PAYMOB_PUBLIC_KEY:-}
+      PAYMOB_SECRET_KEY: ${PAYMOB_SECRET_KEY:-}
+      # Seq log sink — leave empty to disable
+      SEQ_URL: ${SEQ_URL:-http://seq:5341}
+      SEQ_API_KEY: ${SEQ_API_KEY:-}
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      seq:
+        condition: service_started
+    volumes:
+      - api-logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: smarthomeecomm-sqlserver
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-LocalDev!Pass123}
+      MSSQL_PID: Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1' || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  seq:
+    image: datalust/seq:latest
+    container_name: smarthomeecomm-seq
+    restart: unless-stopped
+    environment:
+      SEQ_ACCEPT_EULA: "Y"
+      SEQ_RUN_INSECURELY: "true"
+    ports:
+      - "5341:80"
+    volumes:
+      - seq-data:/data
+
+volumes:
+  api-logs:
+  sqlserver-data:
+  seq-data:
